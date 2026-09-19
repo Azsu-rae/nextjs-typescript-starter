@@ -7,14 +7,7 @@ All of this is done under the umbrella of a non-profit open source organization 
 
 It should be many things:
 
-# A Shared Infrastructure Layer
-
-- Shared database with an open API for a list of trusted associations and contributors to use
-- Open format (CSV, JSON, PDF) of associations and their work for journalists and other orgs to use
-- **Community verification as trust badges:** Instead of a central verification authority, a lightweight community reporting/vouching system
-- Volunteering records made available through that same API
-
-# Platform features
+# Platform features (First Priority)
 
 - **Verified Impact and Certification System:** Volunteering log hours, get shareable digital certificats, to provide verifiable contribution and work
 - **smart-matching:** AI-based matching a person with a skillset to a problem. Basically a recommendation system
@@ -23,6 +16,13 @@ It should be many things:
 - **Campus-Chapter Model** instead of a national platform, each university will have a lightweight page for it's own non-profit workers so students can discover what's active on their platform specifically
 - **Onboarding/first contribution pipeline:** a small, well-scoped tasks tagged by length of time/difficulty for first contributors with a mentor to guide through it. Such tasks would eventually continually accompany events to keep a steady stream of new-commers.
 - **Skill-credit matching** Students can volunteer skills (tutoring, design, translation, dev work) for non-profits in exchange for verified experience on their CV
+
+# A Shared Infrastructure Layer (Eventually, not the priority right now)
+
+- Shared database with an open API for a list of trusted associations and contributors to use
+- Open format (CSV, JSON, PDF) of associations and their work for journalists and other orgs to use
+- **Community verification as trust badges:** Instead of a central verification authority, a lightweight community reporting/vouching system
+- Volunteering records made available through that same API
 
 # Grading Criterias
 
