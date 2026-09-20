@@ -11,12 +11,22 @@ export const authConfig = {
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       let isLoggedIn = !!auth?.user;
-      let isOnDashboard = nextUrl.pathname.startsWith('/protected');
+      let isProtected =
+        nextUrl.pathname.startsWith('/protected') ||
+        nextUrl.pathname.startsWith('/profile') ||
+        nextUrl.pathname.startsWith('/applications') ||
+        nextUrl.pathname.startsWith('/schedule') ||
+        nextUrl.pathname.startsWith('/impact') ||
+        nextUrl.pathname.startsWith('/volunteers') ||
+        nextUrl.pathname.startsWith('/organizations');
+      let isAuthPage =
+        nextUrl.pathname.startsWith('/login') ||
+        nextUrl.pathname.startsWith('/register');
 
-      if (isOnDashboard) {
+      if (isProtected) {
         if (isLoggedIn) return true;
         return false; // Redirect unauthenticated users to login page
-      } else if (isLoggedIn) {
+      } else if (isLoggedIn && isAuthPage) {
         return Response.redirect(new URL('/protected', nextUrl));
       }
 

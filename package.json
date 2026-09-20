@@ -4,7 +4,11 @@
     "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:generate": "drizzle-kit generate:pg",
+    "db:migrate": "drizzle-kit up:pg",
+    "db:push": "drizzle-kit push:pg",
+    "db:check": "drizzle-kit check:pg"
   },
   "dependencies": {
     "@types/node": "^20.10.5",
@@ -21,6 +25,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.16",
+    "drizzle-kit": "^0.20.6",
     "eslint": "8.56.0",
     "eslint-config-next": "^14.0.4",
     "postcss": "^8.4.32",

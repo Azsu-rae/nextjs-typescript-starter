@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function Page() {
   return (
-    <div className="flex h-screen bg-black">
+    <div className="flex h-screen bg-sky-950">
       <div className="w-screen h-screen flex flex-col justify-center items-center">
         <svg
           width="283"

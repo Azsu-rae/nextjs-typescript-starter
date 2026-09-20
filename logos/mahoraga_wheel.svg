@@ -1,0 +1,151 @@
+<svg width="680" height="680" viewBox="0 0 680 680" xmlns="http://www.w3.org/2000/svg" role="img">
+  <title>Mahoraga's Wheel</title>
+  <desc>Mahoraga's eight-handled wheel: a central ringed hub with 8 spokes, each ending in a swirling orb, rendered in ink-brush style on a black background.</desc>
+
+  <rect width="680" height="680" fill="#0a0a0a"/>
+
+  <!-- SPOKE LINES -->
+  <g stroke="#e8e8e0" fill="none" stroke-linecap="round">
+    <line x1="340" y1="257" x2="340" y2="158" stroke-width="5" opacity="0.9"/>
+    <line x1="338" y1="255" x2="342" y2="160" stroke-width="2" opacity="0.4"/>
+    <line x1="422" y1="258" x2="468" y2="212" stroke-width="5" opacity="0.9"/>
+    <line x1="421" y1="260" x2="470" y2="210" stroke-width="2" opacity="0.4"/>
+    <line x1="423" y1="340" x2="522" y2="340" stroke-width="5" opacity="0.9"/>
+    <line x1="423" y1="338" x2="522" y2="342" stroke-width="2" opacity="0.4"/>
+    <line x1="422" y1="422" x2="468" y2="468" stroke-width="5" opacity="0.9"/>
+    <line x1="420" y1="420" x2="470" y2="470" stroke-width="2" opacity="0.4"/>
+    <line x1="340" y1="423" x2="340" y2="522" stroke-width="5" opacity="0.9"/>
+    <line x1="338" y1="423" x2="342" y2="522" stroke-width="2" opacity="0.4"/>
+    <line x1="258" y1="422" x2="212" y2="468" stroke-width="5" opacity="0.9"/>
+    <line x1="260" y1="420" x2="210" y2="470" stroke-width="2" opacity="0.4"/>
+    <line x1="257" y1="340" x2="158" y2="340" stroke-width="5" opacity="0.9"/>
+    <line x1="257" y1="338" x2="158" y2="342" stroke-width="2" opacity="0.4"/>
+    <line x1="258" y1="258" x2="212" y2="212" stroke-width="5" opacity="0.9"/>
+    <line x1="260" y1="260" x2="210" y2="210" stroke-width="2" opacity="0.4"/>
+  </g>
+
+  <!-- DIAGONAL ACCENT LINES -->
+  <g stroke="#d0d0c8" fill="none" stroke-linecap="round" opacity="0.55">
+    <line x1="175" y1="340" x2="505" y2="340" stroke-width="1.5"/>
+    <line x1="340" y1="175" x2="340" y2="505" stroke-width="1.5"/>
+    <line x1="200" y1="200" x2="480" y2="480" stroke-width="1.2"/>
+    <line x1="480" y1="200" x2="200" y2="480" stroke-width="1.2"/>
+    <line x1="295" y1="330" x2="390" y2="350" stroke-width="1" opacity="0.4"/>
+    <line x1="335" y1="295" x2="350" y2="390" stroke-width="1" opacity="0.4"/>
+  </g>
+
+  <!-- OUTER RING -->
+  <circle cx="340" cy="340" r="117" fill="none" stroke="#e8e8e0" stroke-width="6" opacity="0.92"/>
+  <circle cx="340" cy="340" r="119" fill="none" stroke="#e8e8e0" stroke-width="1.5" opacity="0.3"/>
+  <circle cx="340" cy="340" r="115" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.15"/>
+
+  <!-- INNER RING -->
+  <circle cx="340" cy="340" r="52" fill="none" stroke="#e8e8e0" stroke-width="4.5" opacity="0.88"/>
+  <circle cx="340" cy="340" r="50" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.2"/>
+
+  <!-- HUB CENTER -->
+  <circle cx="340" cy="340" r="22" fill="#f0efe8" opacity="0.95"/>
+  <circle cx="340" cy="340" r="14" fill="#ffffff" opacity="0.85"/>
+  <circle cx="340" cy="340" r="7" fill="#ffffff"/>
+
+  <!-- SPOKE-RING JUNCTION MARKS -->
+  <g fill="#e8e8e0" opacity="0.7">
+    <circle cx="340" cy="223" r="4"/>
+    <circle cx="423" cy="257" r="4"/>
+    <circle cx="457" cy="340" r="4"/>
+    <circle cx="423" cy="423" r="4"/>
+    <circle cx="340" cy="457" r="4"/>
+    <circle cx="257" cy="423" r="4"/>
+    <circle cx="223" cy="340" r="4"/>
+    <circle cx="257" cy="257" r="4"/>
+  </g>
+
+  <!-- ORB: top (340, 135) -->
+  <g transform="translate(340,135)">
+    <circle r="36" fill="none" stroke="#c8c8c0" stroke-width="1" opacity="0.3"/>
+    <circle r="32" fill="#111110" stroke="#e8e8e0" stroke-width="3.5" opacity="0.95"/>
+    <circle r="28" fill="none" stroke="#e0dfd8" stroke-width="1" opacity="0.35"/>
+    <path d="M0,-20 Q14,-14 20,0 Q14,14 0,20 Q-14,14 -20,0 Q-12,-16 0,-20Z" fill="none" stroke="#e0dfd8" stroke-width="1.5" opacity="0.6"/>
+    <path d="M0,-14 Q10,-10 14,0 Q10,10 0,14 Q-8,8 -14,0 Q-8,-12 0,-14Z" fill="none" stroke="#e8e8e0" stroke-width="1.2" opacity="0.5"/>
+    <circle r="9" fill="#e8e8e0" opacity="0.9"/>
+    <circle r="5" fill="#ffffff"/>
+  </g>
+
+  <!-- ORB: top-right (485, 195) -->
+  <g transform="translate(485,195)">
+    <circle r="36" fill="none" stroke="#c8c8c0" stroke-width="1" opacity="0.3"/>
+    <circle r="32" fill="#111110" stroke="#e8e8e0" stroke-width="3.5" opacity="0.95"/>
+    <circle r="28" fill="none" stroke="#e0dfd8" stroke-width="1" opacity="0.35"/>
+    <path d="M0,-20 Q14,-14 20,0 Q14,14 0,20 Q-14,14 -20,0 Q-12,-16 0,-20Z" fill="none" stroke="#e0dfd8" stroke-width="1.5" opacity="0.6"/>
+    <path d="M0,-14 Q10,-10 14,0 Q10,10 0,14 Q-8,8 -14,0 Q-8,-12 0,-14Z" fill="none" stroke="#e8e8e0" stroke-width="1.2" opacity="0.5"/>
+    <circle r="9" fill="#e8e8e0" opacity="0.9"/>
+    <circle r="5" fill="#ffffff"/>
+  </g>
+
+  <!-- ORB: right (545, 340) -->
+  <g transform="translate(545,340)">
+    <circle r="36" fill="none" stroke="#c8c8c0" stroke-width="1" opacity="0.3"/>
+    <circle r="32" fill="#111110" stroke="#e8e8e0" stroke-width="3.5" opacity="0.95"/>
+    <circle r="28" fill="none" stroke="#e0dfd8" stroke-width="1" opacity="0.35"/>
+    <path d="M0,-20 Q14,-14 20,0 Q14,14 0,20 Q-14,14 -20,0 Q-12,-16 0,-20Z" fill="none" stroke="#e0dfd8" stroke-width="1.5" opacity="0.6"/>
+    <path d="M0,-14 Q10,-10 14,0 Q10,10 0,14 Q-8,8 -14,0 Q-8,-12 0,-14Z" fill="none" stroke="#e8e8e0" stroke-width="1.2" opacity="0.5"/>
+    <circle r="9" fill="#e8e8e0" opacity="0.9"/>
+    <circle r="5" fill="#ffffff"/>
+  </g>
+
+  <!-- ORB: bottom-right (485, 485) -->
+  <g transform="translate(485,485)">
+    <circle r="36" fill="none" stroke="#c8c8c0" stroke-width="1" opacity="0.3"/>
+    <circle r="32" fill="#111110" stroke="#e8e8e0" stroke-width="3.5" opacity="0.95"/>
+    <circle r="28" fill="none" stroke="#e0dfd8" stroke-width="1" opacity="0.35"/>
+    <path d="M0,-20 Q14,-14 20,0 Q14,14 0,20 Q-14,14 -20,0 Q-12,-16 0,-20Z" fill="none" stroke="#e0dfd8" stroke-width="1.5" opacity="0.6"/>
+    <path d="M0,-14 Q10,-10 14,0 Q10,10 0,14 Q-8,8 -14,0 Q-8,-12 0,-14Z" fill="none" stroke="#e8e8e0" stroke-width="1.2" opacity="0.5"/>
+    <circle r="9" fill="#e8e8e0" opacity="0.9"/>
+    <circle r="5" fill="#ffffff"/>
+  </g>
+
+  <!-- ORB: bottom (340, 545) -->
+  <g transform="translate(340,545)">
+    <circle r="36" fill="none" stroke="#c8c8c0" stroke-width="1" opacity="0.3"/>
+    <circle r="32" fill="#111110" stroke="#e8e8e0" stroke-width="3.5" opacity="0.95"/>
+    <circle r="28" fill="none" stroke="#e0dfd8" stroke-width="1" opacity="0.35"/>
+    <path d="M0,-20 Q14,-14 20,0 Q14,14 0,20 Q-14,14 -20,0 Q-12,-16 0,-20Z" fill="none" stroke="#e0dfd8" stroke-width="1.5" opacity="0.6"/>
+    <path d="M0,-14 Q10,-10 14,0 Q10,10 0,14 Q-8,8 -14,0 Q-8,-12 0,-14Z" fill="none" stroke="#e8e8e0" stroke-width="1.2" opacity="0.5"/>
+    <circle r="9" fill="#e8e8e0" opacity="0.9"/>
+    <circle r="5" fill="#ffffff"/>
+  </g>
+
+  <!-- ORB: bottom-left (195, 485) -->
+  <g transform="translate(195,485)">
+    <circle r="36" fill="none" stroke="#c8c8c0" stroke-width="1" opacity="0.3"/>
+    <circle r="32" fill="#111110" stroke="#e8e8e0" stroke-width="3.5" opacity="0.95"/>
+    <circle r="28" fill="none" stroke="#e0dfd8" stroke-width="1" opacity="0.35"/>
+    <path d="M0,-20 Q14,-14 20,0 Q14,14 0,20 Q-14,14 -20,0 Q-12,-16 0,-20Z" fill="none" stroke="#e0dfd8" stroke-width="1.5" opacity="0.6"/>
+    <path d="M0,-14 Q10,-10 14,0 Q10,10 0,14 Q-8,8 -14,0 Q-8,-12 0,-14Z" fill="none" stroke="#e8e8e0" stroke-width="1.2" opacity="0.5"/>
+    <circle r="9" fill="#e8e8e0" opacity="0.9"/>
+    <circle r="5" fill="#ffffff"/>
+  </g>
+
+  <!-- ORB: left (135, 340) -->
+  <g transform="translate(135,340)">
+    <circle r="36" fill="none" stroke="#c8c8c0" stroke-width="1" opacity="0.3"/>
+    <circle r="32" fill="#111110" stroke="#e8e8e0" stroke-width="3.5" opacity="0.95"/>
+    <circle r="28" fill="none" stroke="#e0dfd8" stroke-width="1" opacity="0.35"/>
+    <path d="M0,-20 Q14,-14 20,0 Q14,14 0,20 Q-14,14 -20,0 Q-12,-16 0,-20Z" fill="none" stroke="#e0dfd8" stroke-width="1.5" opacity="0.6"/>
+    <path d="M0,-14 Q10,-10 14,0 Q10,10 0,14 Q-8,8 -14,0 Q-8,-12 0,-14Z" fill="none" stroke="#e8e8e0" stroke-width="1.2" opacity="0.5"/>
+    <circle r="9" fill="#e8e8e0" opacity="0.9"/>
+    <circle r="5" fill="#ffffff"/>
+  </g>
+
+  <!-- ORB: top-left (195, 195) -->
+  <g transform="translate(195,195)">
+    <circle r="36" fill="none" stroke="#c8c8c0" stroke-width="1" opacity="0.3"/>
+    <circle r="32" fill="#111110" stroke="#e8e8e0" stroke-width="3.5" opacity="0.95"/>
+    <circle r="28" fill="none" stroke="#e0dfd8" stroke-width="1" opacity="0.35"/>
+    <path d="M0,-20 Q14,-14 20,0 Q14,14 0,20 Q-14,14 -20,0 Q-12,-16 0,-20Z" fill="none" stroke="#e0dfd8" stroke-width="1.5" opacity="0.6"/>
+    <path d="M0,-14 Q10,-10 14,0 Q10,10 0,14 Q-8,8 -14,0 Q-8,-12 0,-14Z" fill="none" stroke="#e8e8e0" stroke-width="1.2" opacity="0.5"/>
+    <circle r="9" fill="#e8e8e0" opacity="0.9"/>
+    <circle r="5" fill="#ffffff"/>
+  </g>
+
+</svg>

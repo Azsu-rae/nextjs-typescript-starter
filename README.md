@@ -31,7 +31,6 @@ It should be many things:
 - Applicapility: 25pt
 - Impact on volunteering: 15pt
 - Presentation and group work: 10pt
-- Good mannerism: 50pt
 
 # Next.js + PostgreSQL Auth Starter
 
