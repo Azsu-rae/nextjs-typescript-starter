@@ -2,6 +2,7 @@ import { auth, requireUser } from 'app/auth';
 import { db, getUser } from 'app/db';
 import { applications, certificates, opportunities, organizations, volunteerLogs } from 'app/schema';
 import { and, desc, eq, inArray, sum } from 'drizzle-orm';
+import { applicationStatusLabel } from 'app/labels';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
@@ -107,16 +108,16 @@ export default async function ImpactPage() {
       <TopBar name={me.name ?? email} avatarUrl={me.avatarUrl} active="/impact" />
       <main className="mx-auto max-w-3xl px-4 py-6">
         <div className="mb-4">
-          <h1 className="text-xl font-bold">My impact</h1>
+          <h1 className="text-xl font-bold">أثري</h1>
           <p className="text-sm text-gray-500">
-            {verifiedHours}h verified · {pendingHours}h pending review
+            {verifiedHours} سا موثقة · {pendingHours} سا قيد المراجعة
           </p>
         </div>
         <form action={logHoursAction} className="mb-6 rounded-xl border border-gray-200 bg-white p-4">
-          <h2 className="mb-2 font-semibold">Log hours</h2>
+          <h2 className="mb-2 font-semibold">تسجيل الساعات</h2>
           {myApps.length === 0 ? (
             <p className="text-sm text-gray-500">
-              Apply to a task from the <Link href="/protected" className="underline">feed</Link> first.
+              قدّم على مهمة من <Link href="/protected" className="underline">الفرص</Link> أولا.
             </p>
           ) : (
             <div className="flex flex-wrap gap-2">
@@ -127,7 +128,7 @@ export default async function ImpactPage() {
               >
                 {myApps.map((a) => (
                   <option key={a.opportunityId} value={a.opportunityId}>
-                    {a.title} ({a.status})
+                    {a.title} ({applicationStatusLabel(a.status)})
                   </option>
                 ))}
               </select>
@@ -137,30 +138,30 @@ export default async function ImpactPage() {
                 min={1}
                 max={500}
                 required
-                placeholder="Hours"
+                placeholder="الساعات"
                 className="w-24 rounded-md border border-gray-300 px-3 py-2 text-sm"
               />
               <input
                 name="note"
-                placeholder="What did you do? (optional)"
+                placeholder="ماذا فعلت؟ (اختياري)"
                 className="min-w-[160px] flex-1 rounded-md border border-gray-300 px-3 py-2 text-sm"
               />
               <button className="rounded-md bg-[#1E4D38] px-4 py-2 text-sm text-white hover:bg-[#163A2B]" type="submit">
-                Log
+                سجّل
               </button>
             </div>
           )}
           <p className="mt-2 text-xs text-gray-500">
-            Logs start as pending — the organization verifies them, then they count toward certificates.
+            تبدأ السجلات قيد الانتظار — تحقق منها الجمعية، ثم تحتسب للشهادات.
           </p>
         </form>
 
         <h2 className="mb-2 mt-8 text-sm font-bold uppercase text-gray-500">
-          Certificates ({certs.length})
+          الشهادات ({certs.length})
         </h2>
         {certs.length === 0 ? (
           <p className="rounded-xl border border-dashed border-gray-300 bg-white p-4 text-sm text-gray-500">
-            No certificates yet — they are issued automatically when an organization verifies your hours.
+            لا شهادات بعد — تصدر تلقائيا عندما تحقق الجمعية ساعاتك.
           </p>
         ) : (
           <ul className="space-y-2">
@@ -169,8 +170,8 @@ export default async function ImpactPage() {
                 <div>
                   <p className="font-medium">{c.title}</p>
                   <p className="text-sm text-gray-500">
-                    {c.orgName ?? '—'} · {c.hours ?? '?'}h · issued{' '}
-                    {c.issuedAt ? new Date(c.issuedAt).toLocaleDateString() : ''}
+                    {c.orgName ?? '—'} · {c.hours ?? '?'} سا · صدرت{' '}
+                    {c.issuedAt ? new Date(c.issuedAt).toLocaleDateString('ar') : ''}
                   </p>
                   <p className="mt-1 font-mono text-xs text-gray-500">{c.certUid}</p>
                 </div>
@@ -178,7 +179,7 @@ export default async function ImpactPage() {
                   href={`/c/${c.certUid}`}
                   className="shrink-0 rounded-md bg-[#1E4D38] px-3 py-1.5 text-xs text-white hover:bg-[#163A2B]"
                 >
-                  View / share
+                  عرض / مشاركة
                 </Link>
               </li>
             ))}
@@ -186,11 +187,11 @@ export default async function ImpactPage() {
         )}
 
         <h2 className="mb-2 mt-8 text-sm font-bold uppercase text-gray-500">
-          History ({logs.length})
+          السجل ({logs.length})
         </h2>
         {logs.length === 0 ? (
           <p className="rounded-xl border border-dashed border-gray-300 bg-white p-8 text-center text-sm text-gray-500">
-            No hours logged yet.
+            لم تسجل أي ساعات بعد.
           </p>
         ) : (
           <ul className="space-y-2">
@@ -199,15 +200,15 @@ export default async function ImpactPage() {
                 <div>
                   <p className="font-medium">{l.title}</p>
                   <p className="text-sm text-gray-500">
-                    {l.orgName ?? '—'} · {l.hours}h ·{' '}
-                    {l.createdAt ? new Date(l.createdAt).toLocaleDateString() : ''}
+                    {l.orgName ?? '—'} · {l.hours} سا ·{' '}
+                    {l.createdAt ? new Date(l.createdAt).toLocaleDateString('ar') : ''}
                   </p>
                   {l.note && <p className="mt-1 text-sm text-gray-600">“{l.note}”</p>}
                 </div>
                 <span
                   className={`shrink-0 rounded-full px-2 py-0.5 text-xs ${l.verified ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}
                 >
-                  {l.verified ? 'verified ✓' : 'pending'}
+                  {l.verified ? 'موثقة ✓' : 'قيد الانتظار'}
                 </span>
               </li>
             ))}

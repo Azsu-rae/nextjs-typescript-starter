@@ -36,14 +36,14 @@ export default async function SchedulePage() {
       <TopBar name={me.name ?? email} avatarUrl={me.avatarUrl} active="/schedule" />
       <main className="mx-auto max-w-3xl px-4 py-6">
         <div className="mb-4">
-          <h1 className="text-xl font-bold">Schedule</h1>
-          <p className="text-sm text-gray-500">{upcoming.length} confirmed</p>
+          <h1 className="text-xl font-bold">جدولي</h1>
+          <p className="text-sm text-gray-500">{upcoming.length} مؤكدة</p>
         </div>
         {upcoming.length === 0 ? (
           <p className="rounded-xl border border-dashed border-gray-300 bg-white p-8 text-center text-sm text-gray-500">
-            Nothing confirmed yet. Apply from the{' '}
-            <Link href="/protected" className="underline">feed</Link>, and confirmed
-            tasks will appear here ordered by deadline.
+            لا شيء مؤكد بعد. قدّم من{' '}
+            <Link href="/protected" className="underline">الفرص</Link>، وستظهر
+            المهام المؤكدة هنا مرتبة حسب الأجل.
           </p>
         ) : (
           <>
@@ -56,10 +56,10 @@ export default async function SchedulePage() {
                   <div>
                     <p className="font-medium">{a.title}</p>
                     <p className="text-sm text-gray-500">
-                      {a.orgName ?? '—'} · {a.campus ?? '—'} · {a.effortHours ?? '?'}h
+                      {a.orgName ?? '—'} · {a.campus ?? '—'} · {a.effortHours ?? '?'} سا
                     </p>
                   </div>
-                  <div className="shrink-0 text-right">
+                  <div className="shrink-0 text-left">
                     <p className="text-sm font-medium">{formatDeadline(a.deadline)}</p>
                     <p className="text-xs text-gray-500">{deadlineLabel(a.deadline)}</p>
                   </div>
@@ -69,7 +69,7 @@ export default async function SchedulePage() {
             {withoutDeadline.length > 0 && (
               <>
                 <h2 className="mb-2 mt-6 text-sm font-bold uppercase text-gray-500">
-                  No deadline ({withoutDeadline.length})
+                  بدون أجل ({withoutDeadline.length})
                 </h2>
                 <ul className="space-y-2">
                   {withoutDeadline.map((a) => (

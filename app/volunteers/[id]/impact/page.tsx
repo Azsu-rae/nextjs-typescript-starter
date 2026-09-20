@@ -63,24 +63,24 @@ export default async function VolunteerImpactPage({
 
       <main className="mx-auto max-w-3xl px-4 py-6">
         <Link href={`/volunteers/${userId}`} className="text-sm text-gray-600 underline">
-          ← {v.name ?? `Volunteer #${v.id}`}
+          {v.name ?? `متطوع #${v.id}`}
         </Link>
         <div className="mt-2 flex items-center gap-3">
-          <OrgAvatar name={v.name ?? `Volunteer ${v.id}`} logoUrl={v.avatarUrl} size={48} />
+          <OrgAvatar name={v.name ?? `متطوع ${v.id}`} logoUrl={v.avatarUrl} size={48} />
           <div>
-            <h1 className="text-xl font-bold">Impact</h1>
+            <h1 className="text-xl font-bold">الأثر</h1>
             <p className="text-sm text-gray-500">
-              {verifiedHours}h verified · {certs.length} certificates
+              {verifiedHours} سا موثقة · {certs.length} شهادات
             </p>
           </div>
         </div>
 
         <h2 className="mb-2 mt-6 text-sm font-bold uppercase text-gray-500">
-          Certificates ({certs.length})
+          الشهادات ({certs.length})
         </h2>
         {certs.length === 0 ? (
           <p className="rounded-xl border border-dashed border-gray-300 bg-white p-4 text-sm text-gray-500">
-            No certificates yet.
+            لا شهادات بعد.
           </p>
         ) : (
           <ul className="space-y-2">
@@ -89,15 +89,15 @@ export default async function VolunteerImpactPage({
                 <div>
                   <p className="font-medium">{c.title}</p>
                   <p className="text-sm text-gray-500">
-                    {c.orgName ?? '—'} · {c.hours ?? '?'}h · issued{' '}
-                    {c.issuedAt ? new Date(c.issuedAt).toLocaleDateString() : ''}
+                    {c.orgName ?? '—'} · {c.hours ?? '?'} سا · صدرت{' '}
+                    {c.issuedAt ? new Date(c.issuedAt).toLocaleDateString('ar') : ''}
                   </p>
                 </div>
                 <Link
                   href={`/c/${c.certUid}`}
                   className="shrink-0 rounded-md bg-[#1E4D38] px-3 py-1.5 text-xs text-white hover:bg-[#163A2B]"
                 >
-                  Verify
+                  تحقق
                 </Link>
               </li>
             ))}
@@ -105,11 +105,11 @@ export default async function VolunteerImpactPage({
         )}
 
         <h2 className="mb-2 mt-6 text-sm font-bold uppercase text-gray-500">
-          Verified history ({logs.length})
+          السجل الموثق ({logs.length})
         </h2>
         {logs.length === 0 ? (
           <p className="rounded-xl border border-dashed border-gray-300 bg-white p-4 text-sm text-gray-500">
-            No verified hours yet.
+            لا ساعات موثقة بعد.
           </p>
         ) : (
           <ul className="space-y-2">
@@ -117,8 +117,8 @@ export default async function VolunteerImpactPage({
               <li key={idx} className="rounded-xl border border-gray-200 bg-white p-3">
                 <p className="font-medium">{l.title}</p>
                 <p className="text-sm text-gray-500">
-                  {l.orgName ?? '—'} · {l.hours}h ·{' '}
-                  {l.createdAt ? new Date(l.createdAt).toLocaleDateString() : ''} · verified ✓
+                  {l.orgName ?? '—'} · {l.hours} سا ·{' '}
+                  {l.createdAt ? new Date(l.createdAt).toLocaleDateString('ar') : ''} · موثقة ✓
                 </p>
                 {l.note && <p className="mt-1 text-sm text-gray-600">“{l.note}”</p>}
               </li>

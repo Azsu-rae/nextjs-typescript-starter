@@ -3,6 +3,7 @@ import { db, getUser } from 'app/db';
 import { applications, certificates, users, volunteerLogs } from 'app/schema';
 import OrgAvatar from 'app/components/org-avatar';
 import { asExternalUrl } from 'app/urls';
+import { occupationLabel } from 'app/match';
 import { eq } from 'drizzle-orm';
 import { redirect } from 'next/navigation';
 import { notFound } from 'next/navigation';
@@ -55,21 +56,21 @@ export default async function VolunteerProfilePage({
       <header className="border-b border-gray-200 bg-white">
         <div className="mx-auto max-w-3xl px-4 py-4">
           <div className="flex items-center gap-3">
-            <OrgAvatar name={v.name ?? `Volunteer ${v.id}`} logoUrl={v.avatarUrl} size={56} />
+            <OrgAvatar name={v.name ?? `متطوع ${v.id}`} logoUrl={v.avatarUrl} size={56} />
             <div>
-              <h1 className="text-xl font-bold">{v.name ?? `Volunteer #${v.id}`}</h1>
+              <h1 className="text-xl font-bold">{v.name ?? `متطوع #${v.id}`}</h1>
               <p className="text-sm text-gray-500">
-                {v.occupation ? String(v.occupation).replace('_', ' ') : '—'}
+                {occupationLabel(v.occupation)}
                 {' · '}
                 {v.campus ?? v.university ?? '—'}
                 {' · '}
                 {v.city ?? '—'}
               </p>
               <p className="text-sm text-gray-500">
-                {vHours}h verified · {tasks.length} applications · {certs.length} certificates
+                {vHours} سا موثقة · {tasks.length} طلبات · {certs.length} شهادات
               </p>
               <Link href={`/volunteers/${v.id}/impact`} className="mt-1 inline-block rounded-md bg-[#1E4D38] px-3 py-1.5 text-xs text-white hover:bg-[#163A2B]">
-                View impact →
+                عرض الأثر
               </Link>
             </div>
           </div>
@@ -79,30 +80,30 @@ export default async function VolunteerProfilePage({
       <main className="mx-auto max-w-3xl space-y-4 px-4 py-6">
         {v.bio && (
           <section className="rounded-xl border border-gray-200 bg-white p-4">
-            <h2 className="mb-1 text-sm font-bold uppercase text-gray-500">About</h2>
+            <h2 className="mb-1 text-sm font-bold uppercase text-gray-500">نبذة</h2>
             <p className="text-sm text-gray-700">{v.bio}</p>
           </section>
         )}
         <section className="rounded-xl border border-gray-200 bg-white p-4">
-          <h2 className="mb-2 text-sm font-bold uppercase text-gray-500">Skills</h2>
-          {tags(v.skills, 'No skills listed.')}
+          <h2 className="mb-2 text-sm font-bold uppercase text-gray-500">المهارات</h2>
+          {tags(v.skills, 'لا مهارات مذكورة.')}
         </section>
         <section className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div className="rounded-xl border border-gray-200 bg-white p-4">
-            <h2 className="mb-2 text-sm font-bold uppercase text-gray-500">Languages</h2>
+            <h2 className="mb-2 text-sm font-bold uppercase text-gray-500">اللغات</h2>
             {tags(v.languages, '—')}
           </div>
           <div className="rounded-xl border border-gray-200 bg-white p-4">
-            <h2 className="mb-2 text-sm font-bold uppercase text-gray-500">Interests</h2>
+            <h2 className="mb-2 text-sm font-bold uppercase text-gray-500">الاهتمامات</h2>
             {tags(v.interests, '—')}
           </div>
         </section>
         {(v.availability || v.portfolioUrl) && (
           <section className="rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-700">
-            {v.availability && <p>Available: {v.availability}</p>}
+            {v.availability && <p>متاح: {v.availability}</p>}
             {asExternalUrl(v.portfolioUrl) && (
               <p>
-                Portfolio:{' '}
+                الأعمال:{' '}
                 <a href={asExternalUrl(v.portfolioUrl)!} target="_blank" rel="noreferrer" className="underline">
                   {v.portfolioUrl}
                 </a>

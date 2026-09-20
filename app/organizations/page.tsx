@@ -73,34 +73,34 @@ export default async function OrganizationsPage({
       <TopBar name={me.name ?? ''} avatarUrl={me.avatarUrl} active="/organizations" />
 
       <main className="mx-auto max-w-3xl px-4 py-6">
-        <h1 className="mb-4 text-xl font-bold">Organizations</h1>
+        <h1 className="mb-4 text-xl font-bold">الجمعيات</h1>
         <form method="get" className="mb-6 flex flex-wrap gap-2 rounded-xl border border-gray-200 bg-white p-3">
           <input
             name="q"
             defaultValue={searchParams.q ?? ''}
-            placeholder="Search name or mission…"
+            placeholder="ابحث بالاسم أو الرسالة…"
             className="min-w-[160px] flex-1 rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
           <input
             name="campus"
             defaultValue={searchParams.campus ?? ''}
-            placeholder="Campus"
+            placeholder="الحرم"
             className="w-32 rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
           <label className="flex items-center gap-1 text-sm text-gray-600">
-            <input type="checkbox" name="verified" value="1" defaultChecked={verifiedOnly} /> Verified only
+            <input type="checkbox" name="verified" value="1" defaultChecked={verifiedOnly} /> الموثقة فقط
           </label>
           <button className="rounded-md bg-[#1E4D38] px-4 py-2 text-sm text-white hover:bg-[#163A2B]" type="submit">
-            Search
+            بحث
           </button>
           <Link href="/organizations" className="px-2 py-2 text-sm text-gray-500 underline">
-            Reset
+            إعادة ضبط
           </Link>
         </form>
 
         {filtered.length === 0 ? (
           <p className="rounded-xl border border-dashed border-gray-300 bg-white p-8 text-center text-sm text-gray-500">
-            No organizations match.
+            لا توجد جمعيات مطابقة.
           </p>
         ) : (
           <ul className="space-y-2">
@@ -111,10 +111,10 @@ export default async function OrganizationsPage({
                     <OrgAvatar name={o.name} logoUrl={o.logoUrl} />
                     <div className="min-w-0">
                       <p className="font-medium">
-                        {o.name} {o.verified ? '✓ verified' : ''}
+                        {o.name} {o.verified ? '✓ موثقة' : ''}
                       </p>
                       <p className="truncate text-sm text-gray-500">
-                        {o.campus ?? '—'} · {openCount.get(o.id) ?? 0} open
+                        {o.campus ?? '—'} · {openCount.get(o.id) ?? 0} مفتوحة
                       </p>
                       {o.description && (
                         <p className="mt-1 truncate text-sm text-gray-600">{o.description}</p>
@@ -126,7 +126,7 @@ export default async function OrganizationsPage({
                       href={`/organizations/${o.id}/manage`}
                       className="shrink-0 rounded-md bg-[#1E4D38] px-3 py-1.5 text-xs text-white hover:bg-[#163A2B]"
                     >
-                      Manage
+                      إدارة
                     </Link>
                   )}
                 </div>
@@ -136,35 +136,35 @@ export default async function OrganizationsPage({
         )}
 
         <form action={createOrgAction} className="mt-8 space-y-3 rounded-xl border border-gray-200 bg-white p-4">
-          <h2 className="font-semibold">Start an organization</h2>
+          <h2 className="font-semibold">أنشئ جمعية</h2>
           <p className="text-sm text-gray-500">
-            You become the owner — post events, accept candidates, verify hours.
+            تصبح المالك — انشر الفعاليات، اقبل المرشحين، وثّق الساعات.
           </p>
           <input
             name="name"
             required
-            placeholder="Name — e.g. Bab Ezzouar Tutoring Collective"
+            placeholder="الاسم — مثال: جماعة الدعم المدرسي"
             className="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
           <textarea
             name="description"
-            placeholder="Mission…"
+            placeholder="الرسالة…"
             rows={2}
             className="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
           <div className="flex flex-wrap gap-2">
             <input
               name="campus"
-              placeholder="Campus"
+              placeholder="الحرم"
               className="w-36 rounded-md border border-gray-300 px-3 py-2 text-sm"
             />
             <input
               name="logoUrl"
-              placeholder="Logo URL (optional)"
+              placeholder="رابط الشعار (اختياري)"
               className="min-w-[180px] flex-1 rounded-md border border-gray-300 px-3 py-2 text-sm"
             />
             <button className="rounded-md bg-[#1E4D38] px-4 py-2 text-sm text-white hover:bg-[#163A2B]" type="submit">
-              Create
+              إنشاء
             </button>
           </div>
         </form>

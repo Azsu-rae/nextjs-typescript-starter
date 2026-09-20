@@ -36,12 +36,12 @@ export default async function CertificatePage({
     <div className="flex min-h-screen items-center justify-center bg-[#f8f8f5] px-4">
       <div className="w-full max-w-md rounded-2xl border border-gray-200 bg-white p-8 text-center shadow-xl">
         <p className="text-xs font-bold uppercase tracking-widest text-green-700">
-          ✓ Verified volunteering
+          ✓ تطوع موثق
         </p>
         <div className="mt-4 flex justify-center">
-          <OrgAvatar name={c.volunteerName ?? 'Volunteer'} logoUrl={c.avatarUrl} size={64} />
+          <OrgAvatar name={c.volunteerName ?? 'متطوع'} logoUrl={c.avatarUrl} size={64} />
         </div>
-        <h1 className="mt-3 text-xl font-bold">{c.volunteerName ?? 'Volunteer'}</h1>
+        <h1 className="mt-3 text-xl font-bold">{c.volunteerName ?? 'متطوع'}</h1>
         <p className="mt-1 text-sm text-gray-600">{c.title}</p>
         <div className="mt-2 flex items-center justify-center gap-2 text-sm text-gray-500">
           <OrgAvatar name={c.orgName} logoUrl={c.orgLogoUrl} size={20} />
@@ -51,10 +51,10 @@ export default async function CertificatePage({
         </div>
         <p className="mt-4 font-mono text-xs text-gray-400">{c.certUid}</p>
         <p className="text-xs text-gray-400">
-          Issued {c.issuedAt ? new Date(c.issuedAt).toLocaleDateString() : ''} · Athar
+          صدرت {c.issuedAt ? new Date(c.issuedAt).toLocaleDateString('ar') : ''} · أثر
         </p>
         <Link href="/" className="mt-6 block text-sm text-gray-600 underline">
-          impetus — volunteer your skills
+          أثر — تطوع بمهاراتك
         </Link>
       </div>
     </div>

@@ -37,32 +37,32 @@ export default function Slideshow({
       />
       <button
         type="button"
-        aria-label="Previous image"
+        aria-label="الصورة السابقة"
         onClick={() => go(-1)}
-        className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/60 px-2 py-1 text-sm text-white"
-      >
-        ‹
-      </button>
-      <button
-        type="button"
-        aria-label="Next image"
-        onClick={() => go(1)}
         className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/60 px-2 py-1 text-sm text-white"
       >
         ›
+      </button>
+      <button
+        type="button"
+        aria-label="الصورة التالية"
+        onClick={() => go(1)}
+        className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/60 px-2 py-1 text-sm text-white"
+      >
+        ‹
       </button>
       <div className="absolute bottom-2 left-1/2 flex -translate-x-1/2 items-center gap-1.5">
         {images.map((src, idx) => (
           <button
             key={src}
             type="button"
-            aria-label={`Go to image ${idx + 1}`}
+            aria-label={`الانتقال إلى الصورة ${idx + 1}`}
             onClick={() => setI(idx)}
             className={`h-2 w-2 rounded-full ${idx === i ? 'bg-white' : 'bg-white/50'}`}
           />
         ))}
       </div>
-      <span className="absolute right-2 top-2 rounded bg-black/60 px-1.5 py-0.5 text-[11px] text-white">
+      <span className="absolute left-2 top-2 rounded bg-black/60 px-1.5 py-0.5 text-[11px] text-white">
         {i + 1}/{images.length}
       </span>
     </div>

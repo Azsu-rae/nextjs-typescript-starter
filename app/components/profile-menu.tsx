@@ -37,7 +37,7 @@ export default function ProfileMenu({
         onClick={() => setOpen((o) => !o)}
         aria-haspopup="menu"
         aria-expanded={open}
-        aria-label="Profile menu"
+        aria-label="قائمة الملف الشخصي"
         className="block rounded-full"
       >
         <OrgAvatar name={name} logoUrl={avatarUrl} size={34} />
@@ -50,7 +50,7 @@ export default function ProfileMenu({
           onClick={(e) => {
             if ((e.target as HTMLElement).closest('a')) setOpen(false);
           }}
-          className="absolute right-0 mt-2 w-48 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg"
+          className="absolute left-0 mt-2 w-48 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg"
         >
           {children}
         </div>

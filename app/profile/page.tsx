@@ -1,7 +1,7 @@
 import { auth, requireUser } from 'app/auth';
 import { db, getSkillSuggestions, getUser } from 'app/db';
 import { applications, users, volunteerLogs } from 'app/schema';
-import { parseCommaList } from 'app/match';
+import { parseCommaList, occupationLabel } from 'app/match';
 import { eq, sum } from 'drizzle-orm';
 import { redirect } from 'next/navigation';
 import SkillsInput from 'app/profile/skills-input';
@@ -98,61 +98,61 @@ export default async function ProfilePage({
         <div className="mb-4 flex items-center gap-3">
           <OrgAvatar name={me.name ?? email} logoUrl={me.avatarUrl} size={48} />
           <div>
-            <h1 className="text-xl font-bold">Profile</h1>
+            <h1 className="text-xl font-bold">الملف الشخصي</h1>
             <p className="text-sm text-gray-500">
-              {pct}% complete · {apps.length} applications ·{' '}
-              {Number((hours[0]?.total ?? 0) as any) || 0}h logged
+              {pct}% مكتمل · {apps.length} طلبات ·{' '}
+              {Number((hours[0]?.total ?? 0) as any) || 0} سا مسجلة
             </p>
           </div>
         </div>
         {searchParams.saved === '1' && (
           <p className="mb-4 rounded-xl border border-green-200 bg-green-50 p-3 text-sm text-green-700">
-            Profile saved. Matching now uses your occupation + skills.
+            تم الحفظ. المطابقة تستخدم الآن مهنتك + مهاراتك.
           </p>
         )}
         <form action={updateProfile} className="space-y-4 rounded-xl border border-gray-200 bg-white p-4">
-          <AvatarInput name="avatarUrl" defaultValue={me.avatarUrl} label="Profile picture" />
+          <AvatarInput name="avatarUrl" defaultValue={me.avatarUrl} label="الصورة الشخصية" />
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <label className="text-sm">
-              Name
+              الاسم
               <input name="name" defaultValue={me.name ?? ''} className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" />
             </label>
             <label className="text-sm">
-              Occupation
+              المهنة
               <select name="occupation" defaultValue={me.occupation ?? ''} className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2">
-                <option value="">Select…</option>
+                <option value="">اختر…</option>
                 {OCCUPATIONS.map((o) => (
-                  <option key={o} value={o}>{o.replace('_', ' ')}</option>
+                  <option key={o} value={o}>{occupationLabel(o)}</option>
                 ))}
               </select>
             </label>
             <label className="text-sm">
-              University
+              الجامعة
               <input name="university" defaultValue={me.university ?? ''} className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" />
             </label>
             <label className="text-sm">
-              Campus chapter
+              الفرع الجامعي
               <input name="campus" defaultValue={me.campus ?? ''} placeholder="USTHB" className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" />
             </label>
             <label className="text-sm">
-              City
-              <input name="city" defaultValue={me.city ?? ''} placeholder="Algiers" className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" />
+              المدينة
+              <input name="city" defaultValue={me.city ?? ''} placeholder="الجزائر" className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" />
             </label>
             <label className="text-sm">
-              Phone
+              الهاتف
               <input name="phone" defaultValue={me.phone ?? ''} className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" />
             </label>
             <label className="text-sm">
-              Availability
-              <input name="availability" defaultValue={me.availability ?? ''} placeholder="weekends, evenings" className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" />
+              التوفر
+              <input name="availability" defaultValue={me.availability ?? ''} placeholder="نهايات الأسبوع، الأمسيات" className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" />
             </label>
             <label className="text-sm">
-              Portfolio URL
+              رابط الأعمال
               <input name="portfolioUrl" defaultValue={me.portfolioUrl ?? ''} className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" />
             </label>
           </div>
           <label className="block text-sm">
-            Skills
+            المهارات
             <span className="mt-1 block">
               <SkillsInput
                 name="skills"
@@ -162,19 +162,19 @@ export default async function ProfilePage({
             </span>
           </label>
           <label className="block text-sm">
-            Languages (comma-separated)
-            <input name="languages" defaultValue={join(me.languages)} placeholder="arabic, french, english" className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" />
+            اللغات (مفصولة بفواصل)
+            <input name="languages" defaultValue={join(me.languages)} placeholder="العربية، الفرنسية، الإنجليزية" className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" />
           </label>
           <label className="block text-sm">
-            Interests (comma-separated)
-            <input name="interests" defaultValue={join(me.interests)} placeholder="education, environment" className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" />
+            الاهتمامات (مفصولة بفواصل)
+            <input name="interests" defaultValue={join(me.interests)} placeholder="التعليم، البيئة" className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" />
           </label>
           <label className="block text-sm">
-            Bio
+            نبذة
             <textarea name="bio" defaultValue={me.bio ?? ''} rows={3} className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" />
           </label>
           <button className="rounded-md bg-[#1E4D38] px-4 py-2 text-sm text-white hover:bg-[#163A2B]" type="submit">
-            Save profile
+            حفظ الملف
           </button>
         </form>
       </main>

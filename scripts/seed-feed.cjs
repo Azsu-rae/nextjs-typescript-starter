@@ -22,8 +22,8 @@ async function main() {
       .insert(schema.organizations)
       .values([
         {
-          name: 'USTHB Solidarity Club',
-          description: 'Student-run volunteering chapter.',
+          name: 'نادي التضامن USTHB',
+          description: 'نادٍ طلابي تطوعي.',
           campus: 'USTHB',
           verified: true,
           ownerId: owner.id,
@@ -40,9 +40,9 @@ async function main() {
     await db.insert(schema.opportunities).values([
       {
         orgId,
-        title: 'Translate weekend workshop flyer (AR/FR)',
-        description: '2-page flyer for a campus cleanup workshop. First-contribution friendly, mentor provided.',
-        skills: ['translation', 'arabic', 'french'],
+        title: 'ترجمة مطوية ورشة نهاية الأسبوع (عربي/فرنسي)',
+        description: 'مطوية من صفحتين لورشة تنظيف في الحرم. مناسبة للمساهمين الجدد، مع مرافقة.',
+        skills: ['الترجمة', 'العربية', 'الفرنسية'],
         effortHours: 2,
         difficulty: 'beginner',
         campus: 'USTHB',
@@ -51,9 +51,9 @@ async function main() {
       },
       {
         orgId,
-        title: 'Redesign donation poster',
-        description: 'Redesign an A3 poster for a food drive. Figma or Canva ok.',
-        skills: ['design', 'figma'],
+        title: 'إعادة تصميم ملصق التبرعات',
+        description: 'إعادة تصميم ملصق A3 لحملة جمع المواد الغذائية. فيغما أو كانفا.',
+        skills: ['التصميم'],
         effortHours: 3,
         difficulty: 'beginner',
         campus: 'USTHB',
@@ -62,9 +62,9 @@ async function main() {
       },
       {
         orgId,
-        title: 'Math tutoring for first-years',
-        description: 'Weekly 1h tutoring session, analysis 101. Verified hours + certificate.',
-        skills: ['tutoring', 'math'],
+        title: 'دروس دعم في الرياضيات للسنة الأولى',
+        description: 'حصة دعم أسبوعية (ساعة) في التحليل. ساعات موثقة + شهادة.',
+        skills: ['التدريس', 'الرياضيات'],
         effortHours: 4,
         difficulty: 'intermediate',
         campus: 'USTHB',
@@ -73,12 +73,12 @@ async function main() {
       },
       {
         orgId,
-        title: 'Fix charity site contact form (Next.js)',
-        description: 'Debug a broken server action on the association site. Good for dev portfolio.',
-        skills: ['dev', 'nextjs', 'typescript'],
+        title: 'إصلاح نموذج الاتصال في موقع الجمعية',
+        description: 'خلل في إجراء خادم على موقع الجمعية. مفيد لملف الأعمال.',
+        skills: ['البرمجة', 'nextjs', 'typescript'],
         effortHours: 5,
         difficulty: 'advanced',
-        campus: 'Algiers',
+        campus: 'الجزائر',
         urgent: true,
         status: 'open',
       },

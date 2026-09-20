@@ -3,18 +3,18 @@ import { signOut } from 'app/auth';
 import ProfileMenu from 'app/components/profile-menu';
 
 const DISCOVERY = [
-  { href: '/protected', label: 'Feed' },
-  { href: '/organizations', label: 'Organizations' },
-  { href: '/volunteers', label: 'Volunteers' },
-  { href: '/faculties', label: 'Faculties' },
-  { href: '/about', label: 'About' },
+  { href: '/protected', label: 'الفرص' },
+  { href: '/organizations', label: 'الجمعيات' },
+  { href: '/volunteers', label: 'المتطوعون' },
+  { href: '/faculties', label: 'الكليات' },
+  { href: '/about', label: 'من نحن' },
 ];
 
 const PROFILE_LINKS = [
-  { href: '/profile', label: 'Edit profile' },
-  { href: '/applications', label: 'Applications' },
-  { href: '/schedule', label: 'Schedule' },
-  { href: '/impact', label: 'Impact' },
+  { href: '/profile', label: 'تعديل الملف' },
+  { href: '/applications', label: 'طلباتي' },
+  { href: '/schedule', label: 'جدولي' },
+  { href: '/impact', label: 'أثري' },
 ];
 
 export default function TopBar({
@@ -74,9 +74,9 @@ export default function TopBar({
               <button
                 type="submit"
                 role="menuitem"
-                className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
+                className="block w-full px-4 py-2 text-right text-sm text-gray-700 hover:bg-gray-100"
               >
-                Sign out
+                تسجيل الخروج
               </button>
             </form>
           </ProfileMenu>
@@ -86,13 +86,13 @@ export default function TopBar({
               href="/login"
               className="rounded-md px-4 py-2 text-sm font-semibold text-white hover:bg-white/10"
             >
-              Sign In
+              تسجيل الدخول
             </Link>
             <Link
               href="/register"
               className="rounded-md bg-white px-4 py-2 text-sm font-semibold text-[#1E4D38] hover:bg-[#f8f8f5]"
             >
-              Register
+              حساب جديد
             </Link>
           </div>
         )}

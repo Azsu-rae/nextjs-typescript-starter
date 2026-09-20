@@ -24,10 +24,10 @@ export default function Login({
               className="rounded-lg"
               style={{ width: 56, height: 56, objectFit: 'cover', objectPosition: 'top' }}
             />
-            <h3 className="text-xl font-semibold">Sign In</h3>
+            <h3 className="text-xl font-semibold">تسجيل الدخول</h3>
           </div>
           <p className="text-sm text-gray-500">
-            Volunteer your skills. Get verified. <span className="font-medium text-[#1E4D38]">Athar.</span>
+            تطوع بمهاراتك. كن موثقا. <span className="font-medium text-[#1E4D38]">أثر.</span>
           </p>
         </div>
         <Form
@@ -51,16 +51,15 @@ export default function Login({
         >
           {searchParams.error === 'credentials' && (
             <p className="rounded-md bg-red-50 p-2 text-center text-sm text-red-700">
-              Invalid email or password.
+              البريد الإلكتروني أو كلمة المرور غير صحيحة.
             </p>
           )}
-          <SubmitButton>Sign in</SubmitButton>
+          <SubmitButton>دخول</SubmitButton>
           <p className="text-center text-sm text-gray-600">
-            {"Don't have an account? "}
+            {'ليس لديك حساب؟ '}
             <Link href="/register" className="font-semibold text-gray-800">
-              Sign up
+              سجل مجانا
             </Link>
-            {' for free.'}
           </p>
         </Form>
       </div>

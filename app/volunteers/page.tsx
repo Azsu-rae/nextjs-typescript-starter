@@ -3,6 +3,7 @@ import { db, getUser } from 'app/db';
 import { users, volunteerLogs } from 'app/schema';
 import OrgAvatar from 'app/components/org-avatar';
 import { eq } from 'drizzle-orm';
+import { occupationLabel } from 'app/match';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import TopBar from 'app/components/top-bar';
@@ -75,24 +76,24 @@ export default async function VolunteersPage({
       <TopBar name={me.name ?? ''} avatarUrl={me.avatarUrl} active="/volunteers" />
 
       <main className="mx-auto max-w-3xl px-4 py-6">
-        <h1 className="mb-4 text-xl font-bold">Volunteers</h1>
+        <h1 className="mb-4 text-xl font-bold">المتطوعون</h1>
         <form method="get" className="mb-6 flex flex-wrap gap-2 rounded-xl border border-gray-200 bg-white p-3">
           <input
             name="q"
             defaultValue={searchParams.q ?? ''}
-            placeholder="Search name or bio…"
+            placeholder="ابحث بالاسم أو النبذة…"
             className="min-w-[160px] flex-1 rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
           <input
             name="skill"
             defaultValue={searchParams.skill ?? ''}
-            placeholder="Skill"
+            placeholder="المهارة"
             className="w-32 rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
           <input
             name="campus"
             defaultValue={searchParams.campus ?? ''}
-            placeholder="Campus"
+            placeholder="الحرم"
             className="w-32 rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
           <select
@@ -100,37 +101,37 @@ export default async function VolunteersPage({
             defaultValue={fOccupation}
             className="rounded-md border border-gray-300 px-2 py-2 text-sm"
           >
-            <option value="">All occupations</option>
+            <option value="">كل المهن</option>
             {OCCUPATIONS.map((o) => (
-              <option key={o} value={o}>{o.replace('_', ' ')}</option>
+              <option key={o} value={o}>{occupationLabel(o)}</option>
             ))}
           </select>
           <button className="rounded-md bg-[#1E4D38] px-4 py-2 text-sm text-white hover:bg-[#163A2B]" type="submit">
-            Search
+            بحث
           </button>
           <Link href="/volunteers" className="px-2 py-2 text-sm text-gray-500 underline">
-            Reset
+            إعادة ضبط
           </Link>
         </form>
 
         {filtered.length === 0 ? (
           <p className="rounded-xl border border-dashed border-gray-300 bg-white p-8 text-center text-sm text-gray-500">
-            No volunteers match.
+            لا يوجد متطوعون مطابقون.
           </p>
         ) : (
           <ul className="space-y-2">
             {filtered.map((v) => (
               <li key={v.id} className="rounded-xl border border-gray-200 bg-white p-3">
                 <Link href={`/volunteers/${v.id}`} className="flex items-center gap-3">
-                  <OrgAvatar name={v.name ?? `Volunteer ${v.id}`} logoUrl={v.avatarUrl} />
+                  <OrgAvatar name={v.name ?? `متطوع ${v.id}`} logoUrl={v.avatarUrl} />
                   <div className="min-w-0">
-                    <p className="font-medium">{v.name ?? `Volunteer #${v.id}`}</p>
+                    <p className="font-medium">{v.name ?? `متطوع #${v.id}`}</p>
                     <p className="truncate text-sm text-gray-500">
-                      {v.occupation ? String(v.occupation).replace('_', ' ') : '—'} ·{' '}
-                      {v.campus ?? v.university ?? '—'} · {verifiedHours.get(v.id) ?? 0}h verified
+                      {occupationLabel(v.occupation)} ·{' '}
+                      {v.campus ?? v.university ?? '—'} · {verifiedHours.get(v.id) ?? 0} سا موثقة
                     </p>
                     {(v.skills ?? []).length > 0 && (
-                      <p className="mt-1 truncate text-sm text-gray-600">{(v.skills ?? []).join(', ')}</p>
+                      <p className="mt-1 truncate text-sm text-gray-600">{(v.skills ?? []).join('، ')}</p>
                     )}
                   </div>
                 </Link>

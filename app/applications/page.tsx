@@ -2,6 +2,7 @@ import { auth, requireUser } from 'app/auth';
 import { db, getUser } from 'app/db';
 import { applications, opportunities, organizations } from 'app/schema';
 import { deadlineLabel, formatDeadline } from 'app/dates';
+import { applicationStatusLabel } from 'app/labels';
 import { and, desc, eq, inArray } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
@@ -76,7 +77,7 @@ export default async function ApplicationsPage() {
         </h2>
         {list.length === 0 ? (
           <p className="rounded-xl border border-dashed border-gray-300 bg-white p-4 text-sm text-gray-500">
-            None.
+            لا يوجد.
           </p>
         ) : (
           <ul className="space-y-2">
@@ -88,7 +89,7 @@ export default async function ApplicationsPage() {
                 <div>
                   <p className="font-medium">{a.title}</p>
                   <p className="text-sm text-gray-500">
-                    {a.orgName ?? '—'} · {a.campus ?? '—'} · {a.effortHours ?? '?'}h ·{' '}
+                    {a.orgName ?? '—'} · {a.campus ?? '—'} · {a.effortHours ?? '?'} سا ·{' '}
                     {formatDeadline(a.deadline)} ({deadlineLabel(a.deadline)})
                   </p>
                   {a.message && <p className="mt-1 text-sm text-gray-600">“{a.message}”</p>}
@@ -100,12 +101,12 @@ export default async function ApplicationsPage() {
                       className="rounded-md border border-red-300 px-3 py-1.5 text-sm text-red-700"
                       type="submit"
                     >
-                      Cancel
+                      إلغاء
                     </button>
                   </form>
                 ) : (
                   <span className="shrink-0 rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600">
-                    {a.status}
+                    {applicationStatusLabel(a.status)}
                   </span>
                 )}
               </li>
@@ -120,10 +121,10 @@ export default async function ApplicationsPage() {
     <div className="min-h-screen bg-[#f8f8f5]">
       <TopBar name={me.name ?? email} avatarUrl={me.avatarUrl} active="/applications" />
       <main className="mx-auto max-w-3xl px-4 py-6">
-        <h1 className="mb-4 text-xl font-bold">My applications</h1>
-        <Section title="Confirmed" list={confirmed} cancellable />
-        <Section title="Pending" list={pending} cancellable />
-        <Section title="Other" list={other} cancellable={false} />
+        <h1 className="mb-4 text-xl font-bold">طلباتي</h1>
+        <Section title="مقبولة" list={confirmed} cancellable />
+        <Section title="قيد الانتظار" list={pending} cancellable />
+        <Section title="أخرى" list={other} cancellable={false} />
       </main>
     </div>
   );

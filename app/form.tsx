@@ -15,7 +15,7 @@ export function Form({
           htmlFor="email"
           className="block text-xs text-gray-600 uppercase"
         >
-          Email Address
+          البريد الإلكتروني
         </label>
         <input
           id="email"
@@ -32,7 +32,7 @@ export function Form({
           htmlFor="password"
           className="block text-xs text-gray-600 uppercase"
         >
-          Password
+          كلمة المرور
         </label>
         <input
           id="password"

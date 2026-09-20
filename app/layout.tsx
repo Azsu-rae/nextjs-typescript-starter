@@ -2,9 +2,9 @@ import './globals.css';
 
 import { GeistSans } from 'geist/font/sans';
 
-let title = 'Athar — volunteer work in Algeria';
+let title = 'أثر — العمل التطوعي في الجزائر';
 let description =
-  'Athar connects students and youth with charities and associations: volunteer skills, verified hours, shareable certificates.';
+  'أثر تربط الطلبة والشباب بالجمعيات الخيرية: تطوع بمهاراتك، وثّق ساعاتك، واحصل على شهادات قابلة للمشاركة.';
 
 export const metadata = {
   title,
@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="ar" dir="rtl">
       <body className={GeistSans.variable}>{children}</body>
     </html>
   );

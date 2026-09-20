@@ -56,7 +56,7 @@ export default function SkillsInput({
               {s}
               <button
                 type="button"
-                aria-label={`Remove ${s}`}
+                aria-label={`إزالة ${s}`}
                 onClick={() => remove(s)}
                 className="font-bold"
               >
@@ -86,7 +86,7 @@ export default function SkillsInput({
               setOpen(false);
             }
           }}
-          placeholder="Type to search skills…"
+          placeholder="اكتب للبحث عن المهارات…"
           className="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
           role="combobox"
           aria-expanded={open}
@@ -101,7 +101,7 @@ export default function SkillsInput({
               <li key={s} role="option" aria-selected={false}>
                 <button
                   type="button"
-                  className="block w-full px-3 py-2 text-left text-sm hover:bg-gray-100"
+                  className="block w-full px-3 py-2 text-right text-sm hover:bg-gray-100"
                   onMouseDown={(e) => e.preventDefault()}
                   onClick={() => add(s)}
                 >
@@ -113,11 +113,11 @@ export default function SkillsInput({
               <li role="option" aria-selected={false}>
                 <button
                   type="button"
-                  className="block w-full border-t border-gray-100 px-3 py-2 text-left text-sm font-medium hover:bg-gray-100"
+                  className="block w-full border-t border-gray-100 px-3 py-2 text-right text-sm font-medium hover:bg-gray-100"
                   onMouseDown={(e) => e.preventDefault()}
                   onClick={() => add(qTrimmed)}
                 >
-                  Other (specify): “{qTrimmed}”
+                  أخرى (حدد): “{qTrimmed}”
                 </button>
               </li>
             )}
@@ -126,7 +126,7 @@ export default function SkillsInput({
       </div>
       <input type="hidden" name={name} value={selected.join(', ')} />
       <p className="mt-1 text-xs text-gray-500">
-        Pick from the list, or type a new skill and choose Other (specify).
+        اختر من القائمة، أو اكتب مهارة جديدة واختر أخرى (حدد).
       </p>
     </div>
   );

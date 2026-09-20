@@ -12,24 +12,24 @@ async function main() {
   const sql = postgres(process.env.POSTGRES_URL + '?sslmode=require');
 
   const logos = {
-    'USTHB Solidarity Club': '/orgs/USTHB_solidarity_club.jpg',
-    'Algiers Food Bank': '/orgs/bank_of_food.jpeg',
-    'Green Campus Initiative': '/orgs/green_campus_initiative.png',
-    'Green Algiers Collective': '/orgs/gree_algiers_collective.jpeg',
-    'Clean Campus Crew': '/orgs/cleaning_crew.jpg',
+    'نادي التضامن USTHB': '/orgs/USTHB_solidarity_club.jpg',
+    'بنك الجزائر الغذائي': '/orgs/bank_of_food.jpeg',
+    'مبادرة الحرم الأخضر': '/orgs/green_campus_initiative.png',
+    'جماعة الجزائر الخضراء': '/orgs/gree_algiers_collective.jpeg',
+    'فريق نظافة الحرم': '/orgs/cleaning_crew.jpg',
   };
   for (const [name, url] of Object.entries(logos)) {
     await sql`UPDATE organizations SET logo_url = ${url} WHERE name = ${name}`;
   }
 
   const galleries = {
-    'Saturday food parcel packing': ['/events/food_parcel_packing/im1.jpeg'],
-    'El Hamiz park cleanup + replanting': ['/events/el_hamiz_park_cleanup/im1.jpeg'],
-    'Faculty of Sciences courtyard cleanup': [
+    'توضيب الطرود الغذائية أيام السبت': ['/events/food_parcel_packing/im1.jpeg'],
+    'تنظيف حديقة الحميز وإعادة الغرس': ['/events/el_hamiz_park_cleanup/im1.jpeg'],
+    'تنظيف ساحة كلية العلوم': [
       '/events/faculty_of_sciences_cleaning/im1.jpeg',
       '/events/faculty_of_sciences_cleaning/im2.jpeg',
     ],
-    'Sablettes beach cleanup': [
+    'تنظيف شاطئ الصابلات': [
       '/events/sablette_beach_cleanup/im1.jpeg',
       '/events/sablette_beach_cleanup/im2.jpg',
     ],

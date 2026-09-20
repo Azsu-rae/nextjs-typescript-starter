@@ -51,19 +51,19 @@ export default function AvatarInput({
     setError('');
     if (!file) return;
     if (!file.type.startsWith('image/')) {
-      setError('Please choose an image file.');
+      setError('المرجو اختيار ملف صورة.');
       return;
     }
     setBusy(true);
     try {
       const dataUrl = await resizeToDataUrl(file);
       if (dataUrl.length > MAX_BYTES) {
-        setError('Image is too large even after resizing — try a smaller file.');
+        setError('الصورة كبيرة جدا حتى بعد التصغير — جرب ملفا أصغر.');
         return;
       }
       setValue(dataUrl);
     } catch {
-      setError('Could not read that image.');
+      setError('تعذر قراءة الصورة.');
     } finally {
       setBusy(false);
       if (fileRef.current) fileRef.current.value = '';
@@ -78,7 +78,7 @@ export default function AvatarInput({
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={value}
-            alt="preview"
+            alt="معاينة"
             width={56}
             height={56}
             className="rounded-full object-cover"
@@ -91,7 +91,7 @@ export default function AvatarInput({
         )}
         <div className="flex gap-2">
           <label className="cursor-pointer rounded-md border border-gray-300 px-3 py-1.5 text-sm">
-            {busy ? 'Processing…' : value ? 'Change…' : 'Upload…'}
+            {busy ? 'جار المعالجة…' : value ? 'تغيير…' : 'رفع…'}
             <input
               ref={fileRef}
               type="file"
@@ -107,7 +107,7 @@ export default function AvatarInput({
               onClick={() => setValue('')}
               className="rounded-md border border-gray-300 px-3 py-1.5 text-sm text-red-700"
             >
-              Remove
+              إزالة
             </button>
           )}
         </div>

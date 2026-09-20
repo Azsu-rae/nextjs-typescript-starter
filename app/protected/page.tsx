@@ -5,7 +5,8 @@ import { deadlineLabel, formatDeadline } from 'app/dates';
 import OrgAvatar from 'app/components/org-avatar';
 import Slideshow from 'app/components/slideshow';
 import TopBar from 'app/components/top-bar';
-import { normalizeList, scoreOpportunity } from 'app/match';
+import { normalizeList, occupationLabel, scoreOpportunity } from 'app/match';
+import { difficultyLabel } from 'app/labels';
 import { and, desc, eq } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 import Link from 'next/link';
@@ -125,29 +126,29 @@ export default async function ProtectedPage({
 
       <main className="mx-auto max-w-4xl px-4 py-6">
         <div className="mb-4">
-          <h1 className="text-xl font-bold">Opportunities</h1>
+          <h1 className="text-xl font-bold">الفرص</h1>
           <p className="text-sm text-gray-500">
-            {me?.occupation ? `${String(me.occupation).replace('_', ' ')} · ` : ''}
-            {mySkills.length > 0 ? `skills: ${mySkills.join(', ')}` : 'add skills to your profile for matching'}
+            {me?.occupation ? `${occupationLabel(me.occupation)} · ` : ''}
+            {mySkills.length > 0 ? `مهاراتك: ${mySkills.join('، ')}` : 'أضف مهاراتك إلى ملفك للمطابقة'}
           </p>
         </div>
         <form method="get" className="mb-6 flex flex-wrap gap-2 rounded-xl border border-gray-200 bg-white p-3">
           <input
             name="q"
             defaultValue={searchParams.q ?? ''}
-            placeholder="Search problems…"
+            placeholder="ابحث في المشاكل…"
             className="min-w-[160px] flex-1 rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
           <input
             name="campus"
             defaultValue={searchParams.campus ?? ''}
-            placeholder="Campus"
+            placeholder="الحرم"
             className="w-32 rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
           <input
             name="skill"
             defaultValue={searchParams.skill ?? ''}
-            placeholder="Skill"
+            placeholder="المهارة"
             className="w-32 rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
           <select
@@ -155,30 +156,30 @@ export default async function ProtectedPage({
             defaultValue={fDifficulty}
             className="rounded-md border border-gray-300 px-2 py-2 text-sm"
           >
-            <option value="">All levels</option>
-            <option value="beginner">Beginner</option>
-            <option value="intermediate">Intermediate</option>
-            <option value="advanced">Advanced</option>
+            <option value="">كل المستويات</option>
+            <option value="beginner">مبتدئ</option>
+            <option value="intermediate">متوسط</option>
+            <option value="advanced">متقدم</option>
           </select>
           <label className="flex items-center gap-1 text-sm text-gray-600">
-            <input type="checkbox" name="urgent" value="1" defaultChecked={urgentOnly} /> Urgent
+            <input type="checkbox" name="urgent" value="1" defaultChecked={urgentOnly} /> مستعجل
           </label>
           {mySkills.length > 0 && (
             <label className="flex items-center gap-1 text-sm text-gray-600">
-              <input type="checkbox" name="matched" value="1" defaultChecked={matchedOnly} /> Matched to me
+              <input type="checkbox" name="matched" value="1" defaultChecked={matchedOnly} /> يناسبني
             </label>
           )}
           <button className="rounded-md bg-[#1E4D38] px-4 py-2 text-sm text-white hover:bg-[#163A2B]" type="submit">
-            Filter
+            تصفية
           </button>
           <Link href="/protected" className="px-2 py-2 text-sm text-gray-500 underline">
-            Reset
+            إعادة ضبط
           </Link>
         </form>
 
         {scored.length === 0 ? (
           <p className="rounded-xl border border-dashed border-gray-300 bg-white p-8 text-center text-sm text-gray-500">
-            No open opportunities match these filters.
+            لا توجد فرص مفتوحة تطابق هذه التصفية.
           </p>
         ) : (
           <ul className="space-y-3">
@@ -205,25 +206,25 @@ export default async function ProtectedPage({
                           ) : (
                             r.orgName
                           )}{' '}
-                          {r.orgVerified ? '✓ verified' : ''} · {r.campus ?? r.orgCampus ?? '—'} ·{' '}
-                          {r.difficulty} · {r.effortHours ?? '?'}h · {formatDeadline(r.deadline)} ({deadlineLabel(r.deadline)})
+                          {r.orgVerified ? '✓ موثقة' : ''} · {r.campus ?? r.orgCampus ?? '—'} ·{' '}
+                          {difficultyLabel(r.difficulty)} · {r.effortHours ?? '?'} سا · {formatDeadline(r.deadline)} ({deadlineLabel(r.deadline)})
                         </p>
                       </div>
                     </div>
                     <div className="flex shrink-0 gap-1">
                       {r.urgent && (
-                        <span className="rounded-full bg-red-100 px-2 py-0.5 text-xs text-red-700">urgent</span>
+                        <span className="rounded-full bg-red-100 px-2 py-0.5 text-xs text-red-700">مستعجل</span>
                       )}
                       <span
                         className={`rounded-full px-2 py-0.5 text-xs ${r.matchPct >= 50 ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'}`}
                         title={r.reasons.join(' · ')}
                       >
-                        {r.matchPct}% match
+                        {r.matchPct}% مطابقة
                       </span>
                     </div>
                   </div>
                   <p className="mt-2 text-sm text-gray-700">{r.description}</p>
-                  <p className="mt-1 text-xs text-gray-500">Why: {r.reasons.join(' · ')}</p>
+                  <p className="mt-1 text-xs text-gray-500">لماذا: {r.reasons.join(' · ')}</p>
                   {r.oppSkills.length > 0 && (
                     <div className="mt-2 flex flex-wrap gap-1">
                       {r.oppSkills.map((s) => (
@@ -237,18 +238,18 @@ export default async function ProtectedPage({
                   <div className="mt-3">
                     {applied ? (
                       <Link href="/applications" className="text-sm font-medium text-green-700 underline">
-                        Applied ✓ — manage
+                        تم التقديم ✓ — إدارة
                       </Link>
                     ) : (
                       <form action={applyAction} className="flex gap-2">
                         <input type="hidden" name="opportunityId" value={r.id} />
                         <input
                           name="message"
-                          placeholder="Short note (optional)"
+                          placeholder="ملاحظة قصيرة (اختياري)"
                           className="flex-1 rounded-md border border-gray-300 px-3 py-1.5 text-sm"
                         />
                         <button className="rounded-md bg-[#1E4D38] px-4 py-1.5 text-sm text-white hover:bg-[#163A2B]" type="submit">
-                          Apply
+                          قدّم
                         </button>
                       </form>
                     )}

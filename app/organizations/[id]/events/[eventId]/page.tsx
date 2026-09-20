@@ -2,6 +2,8 @@ import { auth, requireUser } from 'app/auth';
 import { db, getUser } from 'app/db';
 import { applications, certificates, opportunities, organizations, users, volunteerLogs } from 'app/schema';
 import { deadlineLabel, formatDeadline } from 'app/dates';
+import { applicationStatusLabel, difficultyLabel, opportunityStatusLabel } from 'app/labels';
+import { occupationLabel } from 'app/match';
 import { and, desc, eq } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 import { notFound, redirect } from 'next/navigation';
@@ -198,11 +200,11 @@ export default async function EventManagePage({
       <header className="border-b border-gray-200 bg-white">
         <div className="mx-auto max-w-3xl px-4 py-4">
           <Link href={`/organizations/${orgId}/manage`} className="text-sm text-gray-600 underline">
-            ← Manage {org.name}
+            إدارة {org.name}
           </Link>
           <h1 className="mt-1 text-xl font-bold">{event.title}</h1>
           <p className="text-sm text-gray-500">
-            {event.status} · {event.difficulty} · {event.effortHours ?? '?'}h ·{' '}
+            {opportunityStatusLabel(event.status)} · {difficultyLabel(event.difficulty)} · {event.effortHours ?? '?'} سا ·{' '}
             {formatDeadline(event.deadline)} ({deadlineLabel(event.deadline)})
           </p>
           <form action={setEventStatus} className="mt-2">
@@ -210,7 +212,7 @@ export default async function EventManagePage({
             <input type="hidden" name="eventId" value={eventId} />
             <input type="hidden" name="status" value={event.status === 'open' ? 'closed' : 'open'} />
             <button className="rounded-md border border-gray-300 px-3 py-1 text-xs" type="submit">
-              {event.status === 'open' ? 'Close event' : 'Reopen event'}
+              {event.status === 'open' ? 'إغلاق الفعالية' : 'إعادة فتح الفعالية'}
             </button>
           </form>
         </div>
@@ -232,11 +234,11 @@ export default async function EventManagePage({
 
         <section>
           <h2 className="mb-2 text-sm font-bold uppercase text-gray-500">
-            Candidates ({apps.length}{pendingApps.length ? `, ${pendingApps.length} pending` : ''})
+            المرشحون ({apps.length}{pendingApps.length ? `، ${pendingApps.length} قيد الانتظار` : ''})
           </h2>
           {apps.length === 0 ? (
             <p className="rounded-xl border border-dashed border-gray-300 bg-white p-4 text-sm text-gray-500">
-              No applicants yet.
+              لا متقدمين بعد.
             </p>
           ) : (
             <ul className="space-y-2">
@@ -247,11 +249,11 @@ export default async function EventManagePage({
                       <Link href={`/volunteers/${a.userId}`} className="underline">
                         {a.name ?? a.email}
                       </Link>{' '}
-                      · {a.occupation ?? '—'}
+                      · {occupationLabel(a.occupation)}
                     </p>
-                    <p className="text-gray-500">{(a.skills ?? []).join(', ') || 'no skills listed'}</p>
+                    <p className="text-gray-500">{(a.skills ?? []).join('، ') || 'لا مهارات مذكورة'}</p>
                     {a.message && <p className="text-gray-600">“{a.message}”</p>}
-                    <p className="text-xs text-gray-500">status: {a.status}</p>
+                    <p className="text-xs text-gray-500">الحالة: {applicationStatusLabel(a.status)}</p>
                   </div>
                   {a.status === 'pending' && (
                     <div className="flex shrink-0 gap-1">
@@ -261,7 +263,7 @@ export default async function EventManagePage({
                         <input type="hidden" name="appId" value={a.id} />
                         <input type="hidden" name="status" value="accepted" />
                         <button className="rounded-md bg-[#1E4D38] px-3 py-1 text-xs text-white hover:bg-[#163A2B]" type="submit">
-                          Accept
+                          قبول
                         </button>
                       </form>
                       <form action={setAppStatus}>
@@ -270,7 +272,7 @@ export default async function EventManagePage({
                         <input type="hidden" name="appId" value={a.id} />
                         <input type="hidden" name="status" value="rejected" />
                         <button className="rounded-md border border-gray-300 px-3 py-1 text-xs" type="submit">
-                          Reject
+                          رفض
                         </button>
                       </form>
                     </div>
@@ -283,11 +285,11 @@ export default async function EventManagePage({
 
         <section>
           <h2 className="mb-2 text-sm font-bold uppercase text-gray-500">
-            Hours to verify ({pendingLogs.length})
+            ساعات للتحقق ({pendingLogs.length})
           </h2>
           {pendingLogs.length === 0 ? (
             <p className="rounded-xl border border-dashed border-gray-300 bg-white p-4 text-sm text-gray-500">
-              Nothing pending. Verifying mints a certificate automatically.
+              لا شيء قيد الانتظار. التحقق يصدر شهادة تلقائيا.
             </p>
           ) : (
             <ul className="space-y-2">
@@ -311,7 +313,7 @@ export default async function EventManagePage({
                       <input type="hidden" name="eventId" value={eventId} />
                       <input type="hidden" name="logId" value={l.id} />
                       <button className="rounded-md bg-[#1E4D38] px-3 py-1 text-xs text-white hover:bg-[#163A2B]" type="submit">
-                        Verify + certify
+                        تحقق + شهادة
                       </button>
                     </form>
                     <form action={declineLogAction}>
@@ -319,7 +321,7 @@ export default async function EventManagePage({
                       <input type="hidden" name="eventId" value={eventId} />
                       <input type="hidden" name="logId" value={l.id} />
                       <button className="rounded-md border border-gray-300 px-3 py-1 text-xs" type="submit">
-                        Decline
+                        رفض السجل
                       </button>
                     </form>
                   </div>
@@ -332,7 +334,7 @@ export default async function EventManagePage({
         {verifiedLogs.length > 0 && (
           <section>
             <h2 className="mb-2 text-sm font-bold uppercase text-gray-500">
-              Verified ({verifiedLogs.length})
+              موثقة ({verifiedLogs.length})
             </h2>
             <ul className="space-y-2">
               {verifiedLogs.map((l) => (
@@ -341,7 +343,7 @@ export default async function EventManagePage({
                     <Link href={`/volunteers/${l.userId}`} className="underline">
                       {l.name ?? l.email}
                     </Link>{' '}
-                    · {l.hours}h <span className="text-green-700">✓</span>
+                    · {l.hours} سا <span className="text-green-700">✓</span>
                   </p>
                   {l.note && <p className="text-gray-600">“{l.note}”</p>}
                 </li>

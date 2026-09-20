@@ -14,7 +14,7 @@ export function SubmitButton({ children }: { children: React.ReactNode }) {
       {children}
       {pending && (
         <svg
-          className="animate-spin ml-2 h-4 w-4 text-black"
+          className="animate-spin mr-2 h-4 w-4 text-black"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -35,7 +35,7 @@ export function SubmitButton({ children }: { children: React.ReactNode }) {
         </svg>
       )}
       <span aria-live="polite" className="sr-only" role="status">
-        {pending ? 'Loading' : 'Submit form'}
+        {pending ? 'جار التحميل' : 'إرسال الاستمارة'}
       </span>
     </button>
   );

@@ -14,7 +14,7 @@ export default async function Page() {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/home_page_bg_picture.png"
-        alt="Volunteers packing food parcels at Algiers Food Bank"
+        alt="متطوعون يوضبون الطرود الغذائية في بنك الجزائر الغذائي"
         className="absolute inset-0 h-full w-full object-cover"
       />
 
@@ -33,32 +33,31 @@ export default async function Page() {
           style={{ width: 120, height: 120, objectFit: 'cover', objectPosition: 'top' }}
         />
         <h1 className="mt-6 text-4xl font-bold text-[#1E4D38] drop-shadow-[0_1px_12px_rgba(248,248,245,0.9)] sm:text-5xl">
-          A volunteer work cultural revolution in Algeria
+          ثورة ثقافية في العمل التطوعي بالجزائر
         </h1>
         <p className="mx-auto mt-4 max-w-xl bg-[#f8f8f5]/80 px-4 py-2 text-base text-neutral-800 sm:text-lg rounded-lg">
-          Athar connects students and aspiring youth with charities and
-          associations — volunteer your skills, get verified hours and
-          shareable certificates, and turn goodwill into opportunity.
+          أثر تربط الطلبة والشباب الطموح بالجمعيات الخيرية — تطوع بمهاراتك،
+          وثّق ساعاتك، واحصل على شهادات قابلة للمشاركة، وحوّل فعل الخير إلى فرص.
         </p>
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <Link
             href="/protected"
             className="rounded-md bg-[#1E4D38] px-6 py-3 text-sm font-semibold text-white hover:bg-[#163A2B]"
           >
-            Browse opportunities
+            تصفح الفرص
           </Link>
           <Link
             href="/organizations"
             className="rounded-md border-2 border-[#1E4D38] bg-[#f8f8f5]/80 px-6 py-3 text-sm font-semibold text-[#1E4D38] hover:bg-[#f8f8f5]"
           >
-            Register an organization
+            سجل جمعية
           </Link>
         </div>
         {!me && (
           <p className="mt-6 bg-[#f8f8f5]/80 px-4 py-1 text-sm text-neutral-800 rounded-lg">
-            Already volunteering?{' '}
+            متطوع بالفعل؟{' '}
             <Link href="/login" className="font-semibold text-[#1E4D38] underline">
-              Sign in
+              سجل الدخول
             </Link>
           </p>
         )}

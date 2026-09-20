@@ -3,6 +3,7 @@ import { db, getUser } from 'app/db';
 import { applications, opportunities, organizations, volunteerLogs } from 'app/schema';
 import { parseCommaList } from 'app/match';
 import { and, desc, eq, inArray } from 'drizzle-orm';
+import { opportunityStatusLabel } from 'app/labels';
 import { revalidatePath } from 'next/cache';
 import { notFound, redirect } from 'next/navigation';
 import Link from 'next/link';
@@ -131,18 +132,18 @@ export default async function OrgManagePage({
 
       <main className="mx-auto max-w-3xl space-y-8 px-4 py-6">
         <div>
-          <h1 className="text-xl font-bold">Manage {org.name}</h1>
+          <h1 className="text-xl font-bold">إدارة {org.name}</h1>
           <Link href={`/organizations/${orgId}`} className="text-sm text-gray-600 underline">
-            Public view
+            العرض العام
           </Link>
         </div>
         <form action={updateOrgAction} className="space-y-3 rounded-xl border border-gray-200 bg-white p-4">
-          <h2 className="font-semibold">Organization profile</h2>
+          <h2 className="font-semibold">ملف الجمعية</h2>
           <input type="hidden" name="orgId" value={orgId} />
-          <AvatarInput name="logoUrl" defaultValue={org.logoUrl} label="Logo" />
+          <AvatarInput name="logoUrl" defaultValue={org.logoUrl} label="الشعار" />
           <textarea
             name="description"
-            placeholder="Mission…"
+            placeholder="الرسالة…"
             rows={2}
             defaultValue={org.description ?? ''}
             className="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
@@ -150,49 +151,49 @@ export default async function OrgManagePage({
           <div className="flex flex-wrap items-center gap-2">
             <input
               name="campus"
-              placeholder="Campus"
+              placeholder="الحرم"
               defaultValue={org.campus ?? ''}
               className="w-36 rounded-md border border-gray-300 px-3 py-2 text-sm"
             />
             <button className="rounded-md bg-[#1E4D38] px-4 py-2 text-sm text-white hover:bg-[#163A2B]" type="submit">
-              Save profile
+              حفظ الملف
             </button>
           </div>
         </form>
 
         <form action={postEventAction} className="space-y-3 rounded-xl border border-gray-200 bg-white p-4">
-          <h2 className="font-semibold">Post an event</h2>
+          <h2 className="font-semibold">انشر فعالية</h2>
           <input type="hidden" name="orgId" value={orgId} />
-          <input name="title" required placeholder="Title — e.g. Need a translator for a weekend" className="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm" />
-          <textarea name="description" required placeholder="Describe the problem…" rows={3} className="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm" />
+          <input name="title" required placeholder="العنوان — مثال: نحتاج مترجما لنهاية الأسبوع" className="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm" />
+          <textarea name="description" required placeholder="صف المشكلة…" rows={3} className="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm" />
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-            <input name="skills" placeholder="Skills (comma)" className="rounded-md border border-gray-300 px-3 py-2 text-sm" />
-            <input name="effortHours" type="number" min={1} placeholder="Hours" className="rounded-md border border-gray-300 px-3 py-2 text-sm" />
+            <input name="skills" placeholder="المهارات (بفواصل)" className="rounded-md border border-gray-300 px-3 py-2 text-sm" />
+            <input name="effortHours" type="number" min={1} placeholder="الساعات" className="rounded-md border border-gray-300 px-3 py-2 text-sm" />
             <select name="difficulty" className="rounded-md border border-gray-300 px-2 py-2 text-sm">
-              <option value="beginner">Beginner</option>
-              <option value="intermediate">Intermediate</option>
-              <option value="advanced">Advanced</option>
+              <option value="beginner">مبتدئ</option>
+              <option value="intermediate">متوسط</option>
+              <option value="advanced">متقدم</option>
             </select>
             <input name="deadline" type="date" className="rounded-md border border-gray-300 px-3 py-2 text-sm" />
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <input name="campus" placeholder="Campus" defaultValue={org.campus ?? ''} className="w-36 rounded-md border border-gray-300 px-3 py-2 text-sm" />
+            <input name="campus" placeholder="الحرم" defaultValue={org.campus ?? ''} className="w-36 rounded-md border border-gray-300 px-3 py-2 text-sm" />
             <label className="flex items-center gap-1 text-sm text-gray-600">
-              <input type="checkbox" name="urgent" value="1" /> Urgent
+              <input type="checkbox" name="urgent" value="1" /> مستعجل
             </label>
             <button className="rounded-md bg-[#1E4D38] px-4 py-2 text-sm text-white hover:bg-[#163A2B]" type="submit">
-              Publish
+              نشر
             </button>
           </div>
         </form>
 
         <section>
           <h2 className="mb-2 text-sm font-bold uppercase text-gray-500">
-            Events ({opps.length})
+            الفعاليات ({opps.length})
           </h2>
           {opps.length === 0 ? (
             <p className="rounded-xl border border-dashed border-gray-300 bg-white p-4 text-sm text-gray-500">
-              Post your first event above.
+              انشر فعاليتك الأولى أعلاه.
             </p>
           ) : (
             <ul className="space-y-2">
@@ -204,16 +205,16 @@ export default async function OrgManagePage({
                       <div className="min-w-0">
                         <p className="truncate font-semibold">{o.title}</p>
                         <p className="text-sm text-gray-500">
-                          {o.status} · {s.apps} applicants
-                          {s.pendingApps > 0 && ` (${s.pendingApps} pending)`} ·{' '}
-                          {s.pendingLogs > 0 ? `${s.pendingLogs}h to verify` : 'hours clear'}
+                          {opportunityStatusLabel(o.status)} · {s.apps} متقدمين
+                          {s.pendingApps > 0 && ` (${s.pendingApps} قيد الانتظار)`} ·{' '}
+                          {s.pendingLogs > 0 ? `${s.pendingLogs} سا للتحقق` : 'الساعات واضحة'}
                         </p>
                       </div>
                       <Link
                         href={`/organizations/${orgId}/events/${o.id}`}
                         className="shrink-0 rounded-md bg-[#1E4D38] px-3 py-1.5 text-xs text-white hover:bg-[#163A2B]"
                       >
-                        Open →
+                        فتح
                       </Link>
                     </div>
                   </li>

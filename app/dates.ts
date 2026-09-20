@@ -1,7 +1,7 @@
 export function formatDeadline(d: Date | string | null | undefined): string {
-  if (!d) return 'No deadline';
+  if (!d) return 'بدون أجل';
   const dt = d instanceof Date ? d : new Date(d);
-  return dt.toLocaleDateString(undefined, {
+  return dt.toLocaleDateString('ar', {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
@@ -17,9 +17,10 @@ export function daysUntil(d: Date | string | null | undefined): number | null {
 
 export function deadlineLabel(d: Date | string | null | undefined): string {
   const days = daysUntil(d);
-  if (days === null) return 'No deadline';
-  if (days < 0) return `Overdue by ${Math.abs(days)}d`;
-  if (days === 0) return 'Due today';
-  if (days === 1) return 'Due tomorrow';
-  return `Due in ${days}d`;
+  if (days === null) return 'بدون أجل';
+  if (days < 0) return `متجاوز بـ ${Math.abs(days)} يوم`;
+  if (days === 0) return 'آخر أجل اليوم';
+  if (days === 1) return 'آخر أجل غدا';
+  if (days === 2) return 'آخر أجل بعد غد';
+  return `متبق ${days} يوم`;
 }

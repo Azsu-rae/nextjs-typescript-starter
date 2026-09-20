@@ -24,7 +24,7 @@ export default async function FacultiesPage() {
   for (const o of orgs) {
     const raw = (o.campus ?? '').trim();
     const key = raw ? raw.toLowerCase() : 'independent';
-    const g = groups.get(key) ?? { label: raw || 'Independent', orgs: [] };
+    const g = groups.get(key) ?? { label: raw || 'مستقلة', orgs: [] };
     g.orgs.push(o);
     groups.set(key, g);
   }
@@ -35,9 +35,9 @@ export default async function FacultiesPage() {
       <TopBar name={me.name ?? ''} avatarUrl={me.avatarUrl} active="/faculties" />
 
       <main className="mx-auto max-w-3xl px-4 py-6">
-        <h1 className="text-xl font-bold">Faculty chapters</h1>
+        <h1 className="text-xl font-bold">الفروع الجامعية</h1>
         <p className="mb-4 text-sm text-gray-500">
-          Every campus with an active organization, and what&apos;s open there.
+          كل حرم تنشط فيه جمعية، وما هو مفتوح فيه.
         </p>
         <div className="space-y-4">
           {sorted.map((g) => (
@@ -45,8 +45,8 @@ export default async function FacultiesPage() {
               <div className="flex items-baseline justify-between">
                 <h2 className="font-semibold">{g.label}</h2>
                 <p className="text-sm text-gray-500">
-                  {g.orgs.length} org{g.orgs.length === 1 ? '' : 's'} ·{' '}
-                  {g.orgs.reduce((s, o) => s + (openCount.get(o.id) ?? 0), 0)} open
+                  {g.orgs.length} جمعيات ·{' '}
+                  {g.orgs.reduce((s, o) => s + (openCount.get(o.id) ?? 0), 0)} مفتوحة
                 </p>
               </div>
               <ul className="mt-3 space-y-2">
@@ -59,7 +59,7 @@ export default async function FacultiesPage() {
                           {o.name} {o.verified ? '✓' : ''}
                         </p>
                         <p className="truncate text-xs text-gray-500">
-                          {openCount.get(o.id) ?? 0} open
+                          {openCount.get(o.id) ?? 0} مفتوحة
                         </p>
                       </div>
                     </Link>

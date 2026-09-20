@@ -4,6 +4,7 @@ import { applications, opportunities, organizations, volunteerLogs } from 'app/s
 import OrgAvatar from 'app/components/org-avatar';
 import Slideshow from 'app/components/slideshow';
 import { deadlineLabel, formatDeadline } from 'app/dates';
+import { difficultyLabel } from 'app/labels';
 import { and, desc, eq, inArray, sum } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 import { notFound, redirect } from 'next/navigation';
@@ -94,11 +95,11 @@ export default async function OrgProfilePage({
         <div className="mx-auto max-w-3xl px-4 py-4">
           <div className="flex items-center justify-between gap-3">
             <Link href="/organizations" className="text-sm text-gray-600 underline">
-              ← Organizations
+              الجمعيات
             </Link>
             {org.ownerId === me.id && (
               <Link href={`/organizations/${org.id}/manage`} className="rounded-md bg-[#1E4D38] px-3 py-1.5 text-xs text-white hover:bg-[#163A2B]">
-                Manage →
+                إدارة
               </Link>
             )}
           </div>
@@ -109,8 +110,8 @@ export default async function OrgProfilePage({
                 {org.name} {org.verified ? '✓' : ''}
               </h1>
               <p className="text-sm text-gray-500">
-                {org.campus ?? '—'} · {opps.length} open · {appCount.length} applications ·{' '}
-                {Number((hours[0]?.total ?? 0) as any) || 0}h logged
+                {org.campus ?? '—'} · {opps.length} مفتوحة · {appCount.length} طلبات ·{' '}
+                {Number((hours[0]?.total ?? 0) as any) || 0} سا مسجلة
               </p>
             </div>
           </div>
@@ -120,11 +121,11 @@ export default async function OrgProfilePage({
 
       <main className="mx-auto max-w-3xl px-4 py-6">
         <h2 className="mb-2 text-sm font-bold uppercase text-gray-500">
-          Open opportunities ({opps.length})
+          الفرص المفتوحة ({opps.length})
         </h2>
         {opps.length === 0 ? (
           <p className="rounded-xl border border-dashed border-gray-300 bg-white p-8 text-center text-sm text-gray-500">
-            No open opportunities right now.
+            لا توجد فرص مفتوحة حاليا.
           </p>
         ) : (
           <ul className="space-y-3">
@@ -134,15 +135,15 @@ export default async function OrgProfilePage({
                 <li key={o.id} className="rounded-xl border border-gray-200 bg-white p-4">
                   <h3 className="font-semibold">{o.title}</h3>
                   <p className="text-sm text-gray-500">
-                    {o.difficulty} · {o.effortHours ?? '?'}h · {formatDeadline(o.deadline)} ({deadlineLabel(o.deadline)})
-                    {o.urgent ? ' · urgent' : ''}
+                    {difficultyLabel(o.difficulty)} · {o.effortHours ?? '?'} سا · {formatDeadline(o.deadline)} ({deadlineLabel(o.deadline)})
+                    {o.urgent ? ' · مستعجل' : ''}
                   </p>
                   <p className="mt-2 text-sm text-gray-700">{o.description}</p>
                   <Slideshow images={o.images ?? []} title={o.title} />
                   <div className="mt-3">
                     {applied ? (
                       <Link href="/applications" className="text-sm font-medium text-green-700 underline">
-                        Applied ✓ — manage
+                        تم التقديم ✓ — إدارة
                       </Link>
                     ) : (
                       <form action={applyAction} className="flex gap-2">
@@ -150,11 +151,11 @@ export default async function OrgProfilePage({
                         <input type="hidden" name="orgId" value={org.id} />
                         <input
                           name="message"
-                          placeholder="Short note (optional)"
+                          placeholder="ملاحظة قصيرة (اختياري)"
                           className="flex-1 rounded-md border border-gray-300 px-3 py-1.5 text-sm"
                         />
                         <button className="rounded-md bg-[#1E4D38] px-4 py-1.5 text-sm text-white hover:bg-[#163A2B]" type="submit">
-                          Apply
+                          قدّم
                         </button>
                       </form>
                     )}
