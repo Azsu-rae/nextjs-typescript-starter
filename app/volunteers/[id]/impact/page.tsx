@@ -58,7 +58,7 @@ export default async function VolunteerImpactPage({
   const verifiedHours = Number(totals[0]?.total ?? 0);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#f8f8f5]">
       <TopBar name={me.name ?? ''} avatarUrl={me.avatarUrl} active="/volunteers" />
 
       <main className="mx-auto max-w-3xl px-4 py-6">
@@ -95,7 +95,7 @@ export default async function VolunteerImpactPage({
                 </div>
                 <Link
                   href={`/c/${c.certUid}`}
-                  className="shrink-0 rounded-md bg-sky-700 px-3 py-1.5 text-xs text-white hover:bg-sky-800"
+                  className="shrink-0 rounded-md bg-[#1E4D38] px-3 py-1.5 text-xs text-white hover:bg-[#163A2B]"
                 >
                   Verify
                 </Link>

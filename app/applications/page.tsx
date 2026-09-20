@@ -117,7 +117,7 @@ export default async function ApplicationsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#f8f8f5]">
       <TopBar name={me.name ?? email} avatarUrl={me.avatarUrl} active="/applications" />
       <main className="mx-auto max-w-3xl px-4 py-6">
         <h1 className="mb-4 text-xl font-bold">My applications</h1>

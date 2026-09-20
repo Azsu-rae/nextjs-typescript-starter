@@ -69,7 +69,7 @@ export default async function OrganizationsPage({
   });
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#f8f8f5]">
       <TopBar name={me.name ?? ''} avatarUrl={me.avatarUrl} active="/organizations" />
 
       <main className="mx-auto max-w-3xl px-4 py-6">
@@ -90,7 +90,7 @@ export default async function OrganizationsPage({
           <label className="flex items-center gap-1 text-sm text-gray-600">
             <input type="checkbox" name="verified" value="1" defaultChecked={verifiedOnly} /> Verified only
           </label>
-          <button className="rounded-md bg-sky-700 px-4 py-2 text-sm text-white hover:bg-sky-800" type="submit">
+          <button className="rounded-md bg-[#1E4D38] px-4 py-2 text-sm text-white hover:bg-[#163A2B]" type="submit">
             Search
           </button>
           <Link href="/organizations" className="px-2 py-2 text-sm text-gray-500 underline">
@@ -124,7 +124,7 @@ export default async function OrganizationsPage({
                   {o.ownerId === me.id && (
                     <Link
                       href={`/organizations/${o.id}/manage`}
-                      className="shrink-0 rounded-md bg-sky-700 px-3 py-1.5 text-xs text-white hover:bg-sky-800"
+                      className="shrink-0 rounded-md bg-[#1E4D38] px-3 py-1.5 text-xs text-white hover:bg-[#163A2B]"
                     >
                       Manage
                     </Link>
@@ -163,7 +163,7 @@ export default async function OrganizationsPage({
               placeholder="Logo URL (optional)"
               className="min-w-[180px] flex-1 rounded-md border border-gray-300 px-3 py-2 text-sm"
             />
-            <button className="rounded-md bg-sky-700 px-4 py-2 text-sm text-white hover:bg-sky-800" type="submit">
+            <button className="rounded-md bg-[#1E4D38] px-4 py-2 text-sm text-white hover:bg-[#163A2B]" type="submit">
               Create
             </button>
           </div>

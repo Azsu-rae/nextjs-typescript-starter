@@ -193,7 +193,7 @@ export default async function EventManagePage({
   const pendingApps = apps.filter((a) => a.status === 'pending');
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#f8f8f5]">
       <TopBar name={me.name ?? ''} avatarUrl={me.avatarUrl} active="/organizations" />
       <header className="border-b border-gray-200 bg-white">
         <div className="mx-auto max-w-3xl px-4 py-4">
@@ -260,7 +260,7 @@ export default async function EventManagePage({
                         <input type="hidden" name="eventId" value={eventId} />
                         <input type="hidden" name="appId" value={a.id} />
                         <input type="hidden" name="status" value="accepted" />
-                        <button className="rounded-md bg-sky-700 px-3 py-1 text-xs text-white hover:bg-sky-800" type="submit">
+                        <button className="rounded-md bg-[#1E4D38] px-3 py-1 text-xs text-white hover:bg-[#163A2B]" type="submit">
                           Accept
                         </button>
                       </form>
@@ -310,7 +310,7 @@ export default async function EventManagePage({
                       <input type="hidden" name="orgId" value={orgId} />
                       <input type="hidden" name="eventId" value={eventId} />
                       <input type="hidden" name="logId" value={l.id} />
-                      <button className="rounded-md bg-sky-700 px-3 py-1 text-xs text-white hover:bg-sky-800" type="submit">
+                      <button className="rounded-md bg-[#1E4D38] px-3 py-1 text-xs text-white hover:bg-[#163A2B]" type="submit">
                         Verify + certify
                       </button>
                     </form>

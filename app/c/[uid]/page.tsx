@@ -33,7 +33,7 @@ export default async function CertificatePage({
   if (!c) notFound();
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
+    <div className="flex min-h-screen items-center justify-center bg-[#f8f8f5] px-4">
       <div className="w-full max-w-md rounded-2xl border border-gray-200 bg-white p-8 text-center shadow-xl">
         <p className="text-xs font-bold uppercase tracking-widest text-green-700">
           ✓ Verified volunteering
@@ -51,7 +51,7 @@ export default async function CertificatePage({
         </div>
         <p className="mt-4 font-mono text-xs text-gray-400">{c.certUid}</p>
         <p className="text-xs text-gray-400">
-          Issued {c.issuedAt ? new Date(c.issuedAt).toLocaleDateString() : ''} · Impetus
+          Issued {c.issuedAt ? new Date(c.issuedAt).toLocaleDateString() : ''} · Athar
         </p>
         <Link href="/" className="mt-6 block text-sm text-gray-600 underline">
           impetus — volunteer your skills

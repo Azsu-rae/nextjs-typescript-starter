@@ -50,7 +50,7 @@ export default async function VolunteerProfilePage({
     );
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#f8f8f5]">
       <TopBar name={me.name ?? ''} avatarUrl={me.avatarUrl} active="/volunteers" />
       <header className="border-b border-gray-200 bg-white">
         <div className="mx-auto max-w-3xl px-4 py-4">
@@ -68,7 +68,7 @@ export default async function VolunteerProfilePage({
               <p className="text-sm text-gray-500">
                 {vHours}h verified · {tasks.length} applications · {certs.length} certificates
               </p>
-              <Link href={`/volunteers/${v.id}/impact`} className="mt-1 inline-block rounded-md bg-sky-700 px-3 py-1.5 text-xs text-white hover:bg-sky-800">
+              <Link href={`/volunteers/${v.id}/impact`} className="mt-1 inline-block rounded-md bg-[#1E4D38] px-3 py-1.5 text-xs text-white hover:bg-[#163A2B]">
                 View impact →
               </Link>
             </div>

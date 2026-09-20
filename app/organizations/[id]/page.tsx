@@ -88,7 +88,7 @@ export default async function OrgProfilePage({
   const appliedSet = new Set(myApps.map((a) => a.opportunityId));
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#f8f8f5]">
       <TopBar name={me.name ?? ''} avatarUrl={me.avatarUrl} active="/organizations" />
       <header className="border-b border-gray-200 bg-white">
         <div className="mx-auto max-w-3xl px-4 py-4">
@@ -97,7 +97,7 @@ export default async function OrgProfilePage({
               ← Organizations
             </Link>
             {org.ownerId === me.id && (
-              <Link href={`/organizations/${org.id}/manage`} className="rounded-md bg-sky-700 px-3 py-1.5 text-xs text-white hover:bg-sky-800">
+              <Link href={`/organizations/${org.id}/manage`} className="rounded-md bg-[#1E4D38] px-3 py-1.5 text-xs text-white hover:bg-[#163A2B]">
                 Manage →
               </Link>
             )}
@@ -153,7 +153,7 @@ export default async function OrgProfilePage({
                           placeholder="Short note (optional)"
                           className="flex-1 rounded-md border border-gray-300 px-3 py-1.5 text-sm"
                         />
-                        <button className="rounded-md bg-sky-700 px-4 py-1.5 text-sm text-white hover:bg-sky-800" type="submit">
+                        <button className="rounded-md bg-[#1E4D38] px-4 py-1.5 text-sm text-white hover:bg-[#163A2B]" type="submit">
                           Apply
                         </button>
                       </form>

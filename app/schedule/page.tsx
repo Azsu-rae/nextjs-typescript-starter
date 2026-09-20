@@ -32,7 +32,7 @@ export default async function SchedulePage() {
   const withoutDeadline = upcoming.filter((a) => !a.deadline);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#f8f8f5]">
       <TopBar name={me.name ?? email} avatarUrl={me.avatarUrl} active="/schedule" />
       <main className="mx-auto max-w-3xl px-4 py-6">
         <div className="mb-4">

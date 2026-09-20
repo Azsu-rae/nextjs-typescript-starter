@@ -11,12 +11,23 @@ export default function Login({
   searchParams: { error?: string };
 }) {
   return (
-    <div className="flex h-screen w-screen items-center justify-center bg-gray-50">
+    <div className="flex min-h-screen w-screen items-center justify-center bg-gradient-to-b from-[#f8f8f5] to-white px-4">
       <div className="z-10 w-full max-w-md overflow-hidden rounded-2xl border border-gray-100 shadow-xl">
         <div className="flex flex-col items-center justify-center space-y-3 border-b border-gray-200 bg-white px-4 py-6 pt-8 text-center sm:px-16">
-          <h3 className="text-xl font-semibold">Sign In</h3>
+          <div className="flex items-center gap-3">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/athar_logo.png"
+              alt="Athar"
+              width={56}
+              height={56}
+              className="rounded-lg"
+              style={{ width: 56, height: 56, objectFit: 'cover', objectPosition: 'top' }}
+            />
+            <h3 className="text-xl font-semibold">Sign In</h3>
+          </div>
           <p className="text-sm text-gray-500">
-            Use your email and password to sign in
+            Volunteer your skills. Get verified. <span className="font-medium text-[#1E4D38]">Athar.</span>
           </p>
         </div>
         <Form

@@ -51,7 +51,7 @@ export default function SkillsInput({
           {selected.map((s) => (
             <span
               key={s}
-              className="flex items-center gap-1 rounded-full bg-sky-700 px-2 py-0.5 text-xs text-white"
+              className="flex items-center gap-1 rounded-full bg-[#1E4D38] px-2 py-0.5 text-xs text-white"
             >
               {s}
               <button

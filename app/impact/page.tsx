@@ -103,7 +103,7 @@ export default async function ImpactPage() {
     .orderBy(desc(certificates.issuedAt));
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#f8f8f5]">
       <TopBar name={me.name ?? email} avatarUrl={me.avatarUrl} active="/impact" />
       <main className="mx-auto max-w-3xl px-4 py-6">
         <div className="mb-4">
@@ -145,7 +145,7 @@ export default async function ImpactPage() {
                 placeholder="What did you do? (optional)"
                 className="min-w-[160px] flex-1 rounded-md border border-gray-300 px-3 py-2 text-sm"
               />
-              <button className="rounded-md bg-sky-700 px-4 py-2 text-sm text-white hover:bg-sky-800" type="submit">
+              <button className="rounded-md bg-[#1E4D38] px-4 py-2 text-sm text-white hover:bg-[#163A2B]" type="submit">
                 Log
               </button>
             </div>
@@ -176,7 +176,7 @@ export default async function ImpactPage() {
                 </div>
                 <Link
                   href={`/c/${c.certUid}`}
-                  className="shrink-0 rounded-md bg-sky-700 px-3 py-1.5 text-xs text-white hover:bg-sky-800"
+                  className="shrink-0 rounded-md bg-[#1E4D38] px-3 py-1.5 text-xs text-white hover:bg-[#163A2B]"
                 >
                   View / share
                 </Link>

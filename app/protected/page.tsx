@@ -120,7 +120,7 @@ export default async function ProtectedPage({
   const appliedSet = new Set(myApps.map((a) => a.opportunityId));
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#f8f8f5]">
       <TopBar name={me?.name ?? email} avatarUrl={me?.avatarUrl} active="/protected" />
 
       <main className="mx-auto max-w-4xl px-4 py-6">
@@ -168,7 +168,7 @@ export default async function ProtectedPage({
               <input type="checkbox" name="matched" value="1" defaultChecked={matchedOnly} /> Matched to me
             </label>
           )}
-          <button className="rounded-md bg-sky-700 px-4 py-2 text-sm text-white hover:bg-sky-800" type="submit">
+          <button className="rounded-md bg-[#1E4D38] px-4 py-2 text-sm text-white hover:bg-[#163A2B]" type="submit">
             Filter
           </button>
           <Link href="/protected" className="px-2 py-2 text-sm text-gray-500 underline">
@@ -247,7 +247,7 @@ export default async function ProtectedPage({
                           placeholder="Short note (optional)"
                           className="flex-1 rounded-md border border-gray-300 px-3 py-1.5 text-sm"
                         />
-                        <button className="rounded-md bg-sky-700 px-4 py-1.5 text-sm text-white hover:bg-sky-800" type="submit">
+                        <button className="rounded-md bg-[#1E4D38] px-4 py-1.5 text-sm text-white hover:bg-[#163A2B]" type="submit">
                           Apply
                         </button>
                       </form>

@@ -91,7 +91,7 @@ export default async function ProfilePage({
   const skillSuggestions = await getSkillSuggestions();
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#f8f8f5]">
       <TopBar name={me.name ?? email} avatarUrl={me.avatarUrl} active="/profile" />
 
       <main className="mx-auto max-w-3xl px-4 py-6">
@@ -173,7 +173,7 @@ export default async function ProfilePage({
             Bio
             <textarea name="bio" defaultValue={me.bio ?? ''} rows={3} className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" />
           </label>
-          <button className="rounded-md bg-sky-700 px-4 py-2 text-sm text-white hover:bg-sky-800" type="submit">
+          <button className="rounded-md bg-[#1E4D38] px-4 py-2 text-sm text-white hover:bg-[#163A2B]" type="submit">
             Save profile
           </button>
         </form>

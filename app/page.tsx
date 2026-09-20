@@ -1,76 +1,68 @@
+import { auth } from 'app/auth';
+import { getUser } from 'app/db';
+import TopBar from 'app/components/top-bar';
 import Link from 'next/link';
 
-export default function Page() {
+export default async function Page() {
+  const session = await auth();
+  const email = session?.user?.email;
+  const rows = email ? await getUser(email) : [];
+  const me: any = rows[0] ?? null;
+
   return (
-    <div className="flex h-screen bg-sky-950">
-      <div className="w-screen h-screen flex flex-col justify-center items-center">
-        <svg
-          width="283"
-          height="64"
-          viewBox="0 0 283 64"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-36 h-36"
-          aria-label="Vercel logo"
-        >
-          <path
-            d="M141.04 16c-11.04 0-19 7.2-19 18s8.96 18 20 18c6.67 0 12.55-2.64 16.19-7.09l-7.65-4.42c-2.02 2.21-5.09 3.5-8.54 3.5-4.79 0-8.86-2.5-10.37-6.5h28.02c.22-1.12.35-2.28.35-3.5 0-10.79-7.96-17.99-19-17.99zm-9.46 14.5c1.25-3.99 4.67-6.5 9.45-6.5 4.79 0 8.21 2.51 9.45 6.5h-18.9zM248.72 16c-11.04 0-19 7.2-19 18s8.96 18 20 18c6.67 0 12.55-2.64 16.19-7.09l-7.65-4.42c-2.02 2.21-5.09 3.5-8.54 3.5-4.79 0-8.86-2.5-10.37-6.5h28.02c.22-1.12.35-2.28.35-3.5 0-10.79-7.96-17.99-19-17.99zm-9.45 14.5c1.25-3.99 4.67-6.5 9.45-6.5 4.79 0 8.21 2.51 9.45 6.5h-18.9zM200.24 34c0 6 3.92 10 10 10 4.12 0 7.21-1.87 8.8-4.92l7.68 4.43c-3.18 5.3-9.14 8.49-16.48 8.49-11.05 0-19-7.2-19-18s7.96-18 19-18c7.34 0 13.29 3.19 16.48 8.49l-7.68 4.43c-1.59-3.05-4.68-4.92-8.8-4.92-6.07 0-10 4-10 10zm82.48-29v46h-9V5h9zM36.95 0L73.9 64H0L36.95 0zm92.38 5l-27.71 48L73.91 5H84.3l17.32 30 17.32-30h10.39zm58.91 12v9.69c-1-.29-2.06-.49-3.2-.49-5.81 0-10 4-10 10V51h-9V17h9v9.2c0-5.08 5.91-9.2 13.2-9.2z"
-            fill="white"
-          />
-        </svg>
-        <div className="text-center max-w-screen-sm mb-10">
-          <h1 className="text-stone-200 font-bold text-2xl">
-            Next.js + Postgres Auth Starter
-          </h1>
-          <p className="text-stone-400 mt-5">
-            This is a{' '}
-            <a
-              href="https://nextjs.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-stone-400 underline hover:text-stone-200 transition-all"
-            >
-              Next.js
-            </a>{' '}
-            starter kit that uses{' '}
-            <a
-              href="https://next-auth.js.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-stone-400 underline hover:text-stone-200 transition-all"
-            >
-              NextAuth.js
-            </a>{' '}
-            for simple email + password login and a{' '}
-            <a
-              href="https://vercel.com/postgres"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-stone-400 underline hover:text-stone-200 transition-all"
-            >
-              Postgres
-            </a>{' '}
-            database to persist the data.
-          </p>
-        </div>
-        <div className="flex space-x-3">
+    <div className="relative flex min-h-screen w-screen flex-col bg-[#f8f8f5]">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/home_page_bg_picture.png"
+        alt="Volunteers packing food parcels at Algiers Food Bank"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+
+      <div className="relative z-20">
+        <TopBar name={me?.name ?? null} avatarUrl={me?.avatarUrl ?? null} active="/" />
+      </div>
+
+      <main className="relative z-10 mx-auto flex max-w-2xl flex-1 flex-col items-center justify-center px-6 py-16 text-center">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/athar_logo.png"
+          alt="Athar"
+          width={120}
+          height={120}
+          className="rounded-2xl shadow-lg"
+          style={{ width: 120, height: 120, objectFit: 'cover', objectPosition: 'top' }}
+        />
+        <h1 className="mt-6 text-4xl font-bold text-[#1E4D38] drop-shadow-[0_1px_12px_rgba(248,248,245,0.9)] sm:text-5xl">
+          A volunteer work cultural revolution in Algeria
+        </h1>
+        <p className="mx-auto mt-4 max-w-xl bg-[#f8f8f5]/80 px-4 py-2 text-base text-neutral-800 sm:text-lg rounded-lg">
+          Athar connects students and aspiring youth with charities and
+          associations — volunteer your skills, get verified hours and
+          shareable certificates, and turn goodwill into opportunity.
+        </p>
+        <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
           <Link
             href="/protected"
-            className="text-stone-400 underline hover:text-stone-200 transition-all"
+            className="rounded-md bg-[#1E4D38] px-6 py-3 text-sm font-semibold text-white hover:bg-[#163A2B]"
           >
-            Protected Page
+            Browse opportunities
           </Link>
-          <p className="text-white">·</p>
-          <a
-            href="https://vercel.com/templates/next.js/prisma-postgres-auth-starter"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-stone-400 underline hover:text-stone-200 transition-all"
+          <Link
+            href="/organizations"
+            className="rounded-md border-2 border-[#1E4D38] bg-[#f8f8f5]/80 px-6 py-3 text-sm font-semibold text-[#1E4D38] hover:bg-[#f8f8f5]"
           >
-            Deploy to Vercel
-          </a>
+            Register an organization
+          </Link>
         </div>
-      </div>
+        {!me && (
+          <p className="mt-6 bg-[#f8f8f5]/80 px-4 py-1 text-sm text-neutral-800 rounded-lg">
+            Already volunteering?{' '}
+            <Link href="/login" className="font-semibold text-[#1E4D38] underline">
+              Sign in
+            </Link>
+          </p>
+        )}
+      </main>
     </div>
   );
 }

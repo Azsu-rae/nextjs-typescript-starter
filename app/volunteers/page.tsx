@@ -71,7 +71,7 @@ export default async function VolunteersPage({
   });
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#f8f8f5]">
       <TopBar name={me.name ?? ''} avatarUrl={me.avatarUrl} active="/volunteers" />
 
       <main className="mx-auto max-w-3xl px-4 py-6">
@@ -105,7 +105,7 @@ export default async function VolunteersPage({
               <option key={o} value={o}>{o.replace('_', ' ')}</option>
             ))}
           </select>
-          <button className="rounded-md bg-sky-700 px-4 py-2 text-sm text-white hover:bg-sky-800" type="submit">
+          <button className="rounded-md bg-[#1E4D38] px-4 py-2 text-sm text-white hover:bg-[#163A2B]" type="submit">
             Search
           </button>
           <Link href="/volunteers" className="px-2 py-2 text-sm text-gray-500 underline">

@@ -18,6 +18,7 @@ export const authConfig = {
         nextUrl.pathname.startsWith('/schedule') ||
         nextUrl.pathname.startsWith('/impact') ||
         nextUrl.pathname.startsWith('/volunteers') ||
+        nextUrl.pathname.startsWith('/faculties') ||
         nextUrl.pathname.startsWith('/organizations');
       let isAuthPage =
         nextUrl.pathname.startsWith('/login') ||
