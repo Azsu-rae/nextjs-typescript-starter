@@ -2,8 +2,14 @@ import Link from 'next/link';
 import { Form } from 'app/form';
 import { signIn } from 'app/auth';
 import { SubmitButton } from 'app/submit-button';
+import { AuthError } from 'next-auth';
+import { redirect } from 'next/navigation';
 
-export default function Login() {
+export default function Login({
+  searchParams,
+}: {
+  searchParams: { error?: string };
+}) {
   return (
     <div className="flex h-screen w-screen items-center justify-center bg-gray-50">
       <div className="z-10 w-full max-w-md overflow-hidden rounded-2xl border border-gray-100 shadow-xl">
@@ -16,13 +22,27 @@ export default function Login() {
         <Form
           action={async (formData: FormData) => {
             'use server';
-            await signIn('credentials', {
-              redirectTo: '/protected',
-              email: formData.get('email') as string,
-              password: formData.get('password') as string,
-            });
+            try {
+              // Success throws NEXT_REDIRECT internally — that's the happy path.
+              // Bad credentials throw AuthError(CredentialsSignin) instead.
+              await signIn('credentials', {
+                redirectTo: '/protected',
+                email: formData.get('email') as string,
+                password: formData.get('password') as string,
+              });
+            } catch (error) {
+              if (error instanceof AuthError) {
+                redirect('/login?error=credentials');
+              }
+              throw error;
+            }
           }}
         >
+          {searchParams.error === 'credentials' && (
+            <p className="rounded-md bg-red-50 p-2 text-center text-sm text-red-700">
+              Invalid email or password.
+            </p>
+          )}
           <SubmitButton>Sign in</SubmitButton>
           <p className="text-center text-sm text-gray-600">
             {"Don't have an account? "}

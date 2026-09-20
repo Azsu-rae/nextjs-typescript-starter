@@ -1,17 +1,32 @@
--- MVP core: enums + new columns on users + new tables
+-- Baseline: full schema from scratch (fresh databases, e.g. new Neon project).
+-- Idempotent: every statement is IF NOT EXISTS / duplicate_object-safe.
+-- Older incremental migrations (0000_rename_*, 0001_*, ...) no-op on top of this.
 DO $$ BEGIN CREATE TYPE role AS ENUM ('volunteer','org','admin'); EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+DO $$ BEGIN CREATE TYPE occupation AS ENUM ('student','employee','teacher','freelancer','housewife','retiree','job_seeker','other'); EXCEPTION WHEN duplicate_object THEN NULL; END $$;
 DO $$ BEGIN CREATE TYPE difficulty AS ENUM ('beginner','intermediate','advanced'); EXCEPTION WHEN duplicate_object THEN NULL; END $$;
 DO $$ BEGIN CREATE TYPE opportunity_status AS ENUM ('open','closed','filled'); EXCEPTION WHEN duplicate_object THEN NULL; END $$;
 DO $$ BEGIN CREATE TYPE application_status AS ENUM ('pending','accepted','rejected','completed'); EXCEPTION WHEN duplicate_object THEN NULL; END $$;
 
-ALTER TABLE users ADD COLUMN IF NOT EXISTS name varchar(128);
-ALTER TABLE users ADD COLUMN IF NOT EXISTS role role DEFAULT 'volunteer' NOT NULL;
-ALTER TABLE users ADD COLUMN IF NOT EXISTS university varchar(128);
-ALTER TABLE users ADD COLUMN IF NOT EXISTS campus varchar(128);
-ALTER TABLE users ADD COLUMN IF NOT EXISTS skills text[];
-ALTER TABLE users ADD COLUMN IF NOT EXISTS bio text;
-ALTER TABLE users ADD COLUMN IF NOT EXISTS created_at timestamp DEFAULT NOW() NOT NULL;
-DO $$ BEGIN ALTER TABLE users ADD CONSTRAINT users_email_unique UNIQUE(email); EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+CREATE TABLE IF NOT EXISTS users (
+  id SERIAL PRIMARY KEY,
+  email varchar(255) NOT NULL UNIQUE,
+  password varchar(255),
+  name varchar(128),
+  role role DEFAULT 'volunteer' NOT NULL,
+  occupation occupation,
+  university varchar(128),
+  campus varchar(128),
+  city varchar(128),
+  phone varchar(32),
+  availability varchar(64),
+  skills text[],
+  languages text[],
+  interests text[],
+  portfolio_url varchar(256),
+  avatar_url text,
+  bio text,
+  created_at timestamp DEFAULT NOW() NOT NULL
+);
 
 CREATE TABLE IF NOT EXISTS organizations (
   id SERIAL PRIMARY KEY,
@@ -19,6 +34,7 @@ CREATE TABLE IF NOT EXISTS organizations (
   description text,
   campus varchar(128),
   verified boolean DEFAULT false NOT NULL,
+  logo_url text,
   owner_id integer REFERENCES users(id),
   created_at timestamp DEFAULT NOW() NOT NULL
 );
@@ -34,6 +50,8 @@ CREATE TABLE IF NOT EXISTS opportunities (
   campus varchar(128),
   urgent boolean DEFAULT false NOT NULL,
   status opportunity_status DEFAULT 'open' NOT NULL,
+  deadline timestamp,
+  images text[],
   created_at timestamp DEFAULT NOW() NOT NULL
 );
 

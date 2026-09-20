@@ -20,6 +20,20 @@ async function main() {
   // --- Organizations (ownership spread so each user manages one) ---
   const orgDefs = [
     {
+      name: 'Algiers Food Bank',
+      description: 'Weekly food distribution for families in need.',
+      campus: 'Algiers',
+      verified: true,
+      owner: u1.id,
+    },
+    {
+      name: 'Green Campus Initiative',
+      description: 'Tree planting and campus cleanups.',
+      campus: 'USTHB',
+      verified: false,
+      owner: u1.id,
+    },
+    {
       name: 'Green Algiers Collective',
       description: 'Tree planting and park rehabilitation across Algiers.',
       campus: 'Algiers',
@@ -46,6 +60,28 @@ async function main() {
 
   // --- Events ---
   const eventDefs = [
+    {
+      org: 'Algiers Food Bank',
+      title: 'Saturday food parcel packing',
+      description: 'Sort and pack parcels for 80 families. No experience needed.',
+      skills: ['logistics'],
+      effortHours: 4,
+      difficulty: 'beginner',
+      campus: 'Algiers',
+      urgent: true,
+      days: 5,
+    },
+    {
+      org: 'Green Campus Initiative',
+      title: 'Campus tree mapping',
+      description: 'Map and photograph 30 campus trees for the green registry.',
+      skills: ['environment', 'photography'],
+      effortHours: 3,
+      difficulty: 'beginner',
+      campus: 'USTHB',
+      urgent: false,
+      days: 12,
+    },
     {
       org: 'Green Algiers Collective',
       title: 'Bab Ezzouar pine planting day',
@@ -115,6 +151,8 @@ async function main() {
   // --- Applications: pending + accepted spread across the 3 users ---
   // [userId, eventTitle, status]
   const appDefs = [
+    [u1.id, 'Saturday food parcel packing', 'accepted'],
+    [u2.id, 'Saturday food parcel packing', 'accepted'],
     [u1.id, 'Bab Ezzouar pine planting day', 'pending'],
     [u1.id, 'Faculty of Sciences courtyard cleanup', 'pending'],
     [u2.id, 'Bab Ezzouar pine planting day', 'accepted'],

@@ -1,4 +1,4 @@
-import { auth } from 'app/auth';
+import { auth, requireUser } from 'app/auth';
 import { db, getUser } from 'app/db';
 import { certificates, opportunities, organizations, users, volunteerLogs } from 'app/schema';
 import OrgAvatar from 'app/components/org-avatar';
@@ -13,11 +13,7 @@ export default async function VolunteerImpactPage({
 }: {
   params: { id: string };
 }) {
-  const session = await auth();
-  const email = session?.user?.email ?? '';
-  const rows = email ? await getUser(email) : [];
-  if (!rows[0]) redirect('/login');
-  const me: any = rows[0];
+  const me: any = await requireUser();
 
   const userId = Number(params.id);
   if (!userId) notFound();

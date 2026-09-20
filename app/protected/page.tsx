@@ -1,4 +1,4 @@
-import { auth } from 'app/auth';
+import { auth, requireUser } from 'app/auth';
 import { db, getUser } from 'app/db';
 import { applications, opportunities, organizations } from 'app/schema';
 import { deadlineLabel, formatDeadline } from 'app/dates';
@@ -54,10 +54,8 @@ export default async function ProtectedPage({
 }: {
   searchParams: Search;
 }) {
-  const session = await auth();
-  const email = session?.user?.email ?? '';
-  const userRows = email ? await getUser(email) : [];
-  const me = userRows[0] as any | undefined;
+  const me = await requireUser() as any;
+  const email = me.email as string;
   const mySkills = normalizeList(me?.skills);
 
   const rows = await db

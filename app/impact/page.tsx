@@ -1,4 +1,4 @@
-import { auth } from 'app/auth';
+import { auth, requireUser } from 'app/auth';
 import { db, getUser } from 'app/db';
 import { applications, certificates, opportunities, organizations, volunteerLogs } from 'app/schema';
 import { and, desc, eq, inArray, sum } from 'drizzle-orm';
@@ -42,11 +42,8 @@ async function logHoursAction(formData: FormData) {
 }
 
 export default async function ImpactPage() {
-  const session = await auth();
-  const email = session?.user?.email ?? '';
-  const rows = email ? await getUser(email) : [];
-  const me: any = rows[0];
-  if (!me) redirect('/login');
+  const me: any = await requireUser();
+  const email = me.email as string;
 
   const myApps = await db
     .select({

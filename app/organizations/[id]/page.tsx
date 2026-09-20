@@ -1,4 +1,4 @@
-import { auth } from 'app/auth';
+import { auth, requireUser } from 'app/auth';
 import { db, getUser } from 'app/db';
 import { applications, opportunities, organizations, volunteerLogs } from 'app/schema';
 import OrgAvatar from 'app/components/org-avatar';
@@ -45,11 +45,7 @@ export default async function OrgProfilePage({
 }: {
   params: { id: string };
 }) {
-  const session = await auth();
-  const email = session?.user?.email ?? '';
-  const userRows = email ? await getUser(email) : [];
-  const me: any = userRows[0];
-  if (!me) redirect('/login');
+  const me: any = await requireUser();
 
   const orgId = Number(params.id);
   if (!orgId) notFound();

@@ -1,4 +1,4 @@
-import { auth } from 'app/auth';
+import { auth, requireUser } from 'app/auth';
 import { db, getUser } from 'app/db';
 import { users, volunteerLogs } from 'app/schema';
 import OrgAvatar from 'app/components/org-avatar';
@@ -30,10 +30,7 @@ export default async function VolunteersPage({
 }: {
   searchParams: Search;
 }) {
-  const session = await auth();
-  const email = session?.user?.email ?? '';
-  const rows = email ? await getUser(email) : [];
-  if (!rows[0]) redirect('/login');
+  const me: any = await requireUser();
 
   // Public fields only — never passwords, emails, or phones
   const all = await db
@@ -75,7 +72,7 @@ export default async function VolunteersPage({
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <TopBar name={rows[0].name ?? ''} avatarUrl={rows[0].avatarUrl} active="/volunteers" />
+      <TopBar name={me.name ?? ''} avatarUrl={me.avatarUrl} active="/volunteers" />
 
       <main className="mx-auto max-w-3xl px-4 py-6">
         <h1 className="mb-4 text-xl font-bold">Volunteers</h1>

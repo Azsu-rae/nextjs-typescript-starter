@@ -45,7 +45,11 @@ export default function ProfileMenu({
       {open && (
         <div
           role="menu"
-          onClick={() => setOpen(false)}
+          // Close on link picks only: closing on the submit click would
+          // unmount the sign-out form before its submit fires, swallowing it.
+          onClick={(e) => {
+            if ((e.target as HTMLElement).closest('a')) setOpen(false);
+          }}
           className="absolute right-0 mt-2 w-48 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg"
         >
           {children}

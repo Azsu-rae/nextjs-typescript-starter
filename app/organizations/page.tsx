@@ -1,4 +1,4 @@
-import { auth } from 'app/auth';
+import { auth, requireUser } from 'app/auth';
 import { db, getUser } from 'app/db';
 import { opportunities, organizations } from 'app/schema';
 import OrgAvatar from 'app/components/org-avatar';
@@ -44,11 +44,7 @@ export default async function OrganizationsPage({
 }: {
   searchParams: Search;
 }) {
-  const session = await auth();
-  const email = session?.user?.email ?? '';
-  const rows = email ? await getUser(email) : [];
-  const me: any = rows[0];
-  if (!me) redirect('/login');
+  const me: any = await requireUser();
 
   const orgs = await db.select().from(organizations).orderBy(organizations.name);
   const openOpps = await db

@@ -1,4 +1,4 @@
-import { auth } from 'app/auth';
+import { auth, requireUser } from 'app/auth';
 import { db, getUser } from 'app/db';
 import { applications, opportunities, organizations } from 'app/schema';
 import { deadlineLabel, formatDeadline } from 'app/dates';
@@ -8,11 +8,8 @@ import Link from 'next/link';
 import TopBar from 'app/components/top-bar';
 
 export default async function SchedulePage() {
-  const session = await auth();
-  const email = session?.user?.email ?? '';
-  const rows = email ? await getUser(email) : [];
-  const me: any = rows[0];
-  if (!me) redirect('/login');
+  const me: any = await requireUser();
+  const email = me.email as string;
 
   const confirmed = await db
     .select({

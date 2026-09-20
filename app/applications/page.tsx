@@ -1,4 +1,4 @@
-import { auth } from 'app/auth';
+import { auth, requireUser } from 'app/auth';
 import { db, getUser } from 'app/db';
 import { applications, opportunities, organizations } from 'app/schema';
 import { deadlineLabel, formatDeadline } from 'app/dates';
@@ -34,11 +34,8 @@ async function cancelAction(formData: FormData) {
 }
 
 export default async function ApplicationsPage() {
-  const session = await auth();
-  const email = session?.user?.email ?? '';
-  const rows = email ? await getUser(email) : [];
-  const me: any = rows[0];
-  if (!me) redirect('/login');
+  const me: any = await requireUser();
+  const email = me.email as string;
 
   const apps = await db
     .select({
